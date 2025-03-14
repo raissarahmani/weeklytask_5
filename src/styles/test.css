@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+@theme {
+    --color-base: rgba(255, 255, 255, 1);
+    --color-primary: rgba(29, 78, 216, 1);
+    --font-mulish: "Mulish", sans-serif;
+}
+
+@layer base {
+    body {
+        @apply bg-blue-400;
+        font-family: var(--font-mulish);
+    }
+}
+
+@layer components {
+    .custom-button {
+        @apply rounded-sm py-[2vh] px-[1.5vw] bg-[#fff] text-[#1D4ED8] border border-solid;
+        border-color: var(--color-primary); /* ✅ FIX: Apply variable like this */
+    }
+}
