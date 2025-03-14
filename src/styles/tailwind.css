@@ -4,13 +4,14 @@
     --color-base: rgba(255, 255, 255, 1);
     --color-primary: rgba(29, 78, 216, 1);
     --color-secondary: rgba(37, 99, 235, 1);
+    --color-tertiary: rgba(222, 222, 222, 1);
 }
 
 @layer base {
     :root {
         --font-default: 'Mulish', 'sans-serif';
         background-color: var(--color-base);
-        @apply bg-blue-400;
+        /* @apply bg-blue-400; */
     }
     header {
         @apply text-sm font-normal text-[#0F172A];
@@ -45,7 +46,27 @@
         @apply bg-[#a0a3bd1a] text-[#A0A3BD] rounded-3xl mr-[1vw] p-[1.5vh] text-left
     }
     .detail-hover {
-        @apply visible absolute top-0 left-0 flex flex-col items-center justify-center bg-[#00000066] object-cover w-full h-3/4 rounded-md px-[3vw] z-[2]
+        @apply visible absolute top-0 left-0 flex flex-col items-center justify-center bg-[#00000066] object-cover w-full rounded-md px-[3vw] z-[2]
+    }
+    .font-text {
+        @apply font-medium text-sm 
+    }
+    .border-input {
+        border-color: var(--color-tertiary);
+        @apply border border-solid rounded-sm px-[1vw] my-[2vh];
+    }
+    .genre-option {
+        @apply font-medium text-sm text-[#4E4B66] bg-[#fff] rounded-lg my-[1vh] mx-[1vw] py-[1vh] px-[2vw];
+    }
+    .movie-now {
+        @apply grid grid-cols-4 grid-rows-3 items-center justify-between mb-[15vh];
+    }
+    .container-viewall {
+        @apply w-4/5 h-7/10 rounded-md relative
+    }
+    .pages {
+        border-color: var(--color-tertiary);
+        @apply border border-solid rounded-full text-lg text-[#4E4B66] mx-[0.5vw] text-center w-[5vh] h-[5vh] cursor-pointer relative
     }
     .newsletter-text {
         @apply text-[#fff] text-5xl font-normal
@@ -72,3 +93,4 @@
         '. . . m';
     }
 }
+
