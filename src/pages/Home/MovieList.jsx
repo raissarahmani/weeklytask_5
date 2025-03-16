@@ -35,17 +35,17 @@ useEffect(() => {
             <div className='mt-[1vh] ml-[1vw]'>
                 <p>Filter</p>
                 <div className='flex flex-row justify-evenly mt-[1vh]'>
-                    <div className='genre-option'>Thriller</div>
-                    <div className='genre-option'>Horror</div>
-                    <div className='genre-option'>Romantic</div>
-                    <div className='genre-option'>Adventure</div>
-                    <div className='genre-option'>Sci-Fi</div>
+                    <div className='genre-option hover:bg-[#1D4ED8] hover:text-[#fff]'>Thriller</div>
+                    <div className='genre-option hover:bg-[#1D4ED8] hover:text-[#fff]'>Horror</div>
+                    <div className='genre-option hover:bg-[#1D4ED8] hover:text-[#fff]'>Romantic</div>
+                    <div className='genre-option hover:bg-[#1D4ED8] hover:text-[#fff]'>Adventure</div>
+                    <div className='genre-option hover:bg-[#1D4ED8] hover:text-[#fff]'>Sci-Fi</div>
                 </div>
             </div>
         </div>
         <div className="grid grid-cols-4 gap-4">
             {movies.map((movie) => (
-                <div key={movie.id} className="container-viewall">
+                <div key={movie.id} className="container-viewall relative">
                     <img className='w-full h-full object-cover rounded-lg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
                     <p className="movie-title">{movie.title}</p>
                     <div className="flex flex-row text-xs">
@@ -53,21 +53,21 @@ useEffect(() => {
                             <p key={id} className='movie-genre'> {genreList[id] || "Unknown"} </p>
                         ))}
                     </div>
-                    <div className="detail-hover h-full">
-                        <div>Details</div>
-                        <div>Buy Ticket</div>
+                    <div className="detail-hover">
+                        <div className='text-[#fff] py-[1vh] my-[0.5vh] text-center w-full border border-solid border-[#fff] rounded-md cursor-pointer'>Details</div>
+                        <div className='text-[#fff] bg-[#1D4ED8] py-[1vh] my-[0.5vh] text-center w-full border border-solid border-[#1D4ED8] rounded-md cursor-pointer'>Buy Ticket</div>
                     </div>
                 </div>
             ))}
         </div>
         <div className="flex flex-row items-center justify-center">
-            <div className='pages'>1</div>
-            <div className='pages'>2</div>
-            <div className='pages'>3</div>
-            <div className='pages'>4</div>
+        <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>1</div>
+            <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>2</div>
+            <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>3</div>
+            <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>4</div>
             <div className='pages'>
-                <img className='absolute top-1/8 left-1/5' src={ArrowBlue} alt="Next" />
-                <img className='hidden' src={ArrowWhite} alt="Next" />
+                <img className='absolute top-1/8 left-1/5 block hover:hidden' src={ArrowBlue} alt="Next" />
+                <img className='absolute top-1/8 left-1/5 hidden hover:block' src={ArrowWhite} alt="Next" />
             </div>
         </div>
     </section>
