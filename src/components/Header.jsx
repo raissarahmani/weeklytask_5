@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import Menu from '../assets/Menu.png'
 
@@ -9,9 +10,9 @@ function Header() {
             <img className='w-7/10' src="../../public/tickitz2.png" alt="Logo Tickitz" />
         </div>
         <nav className='flex flex-row justify-evenly w-3/5'>
-            <p>Home</p>
-            <p>Movie</p>
-            <p>Buy Ticket</p>
+            <Link to='/'>Home</Link>
+            <Link to='now-playing'>Movie</Link>
+            <Link to='/now-playing/detail'>Buy Ticket</Link>
         </nav>
         <div className='w-1/4 flex flex-row justify-right'>
             <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'>Sign In</button>
