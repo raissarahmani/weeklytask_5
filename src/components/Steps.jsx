@@ -4,7 +4,7 @@ import Checked from '../assets/ic_round-done.png'
 
 function Steps() {
   return (
-    <section className='flex justify-between px-[17vw] mb-[5vh]'>
+    <section className='flex justify-between px-[5vw] mb-[5vh]'>
         <div>
             <div className='steps bg-[#008000]'><img src={Checked} alt="Done" /></div>
             <p className='flex justify-center font-semibold text-sm text-[#4E4B66] mx-[2vw]'>Dates and Time</p>

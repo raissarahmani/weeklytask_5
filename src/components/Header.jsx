@@ -15,8 +15,8 @@ function Header() {
             <Link to='/now-playing/detail'>Buy Ticket</Link>
         </nav>
         <div className='w-1/4 flex flex-row justify-right'>
-            <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'>Sign In</button>
-            <button className='header-button mx-[0.5vw] bg-[#1D4ED8] text-[#fff]'>Sign Up</button>
+            <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
+            <button className='header-button mx-[0.5vw] bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
         </div>
         <div className='hidden'>
             <img src={Menu} alt="Menu" />
