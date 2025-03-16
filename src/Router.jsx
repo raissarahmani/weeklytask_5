@@ -14,6 +14,10 @@ import Auth from './Auth';
 import Signup from './pages/Signup'
 import Signin from './pages/Signin'
 
+import ProfilePage from './ProfilePage'
+import Profile from './pages/Profile'
+import History from './pages/History'
+
 function Router() {
   return (
     <Routes>
@@ -33,10 +37,10 @@ function Router() {
             <Route path="register" element = {<Signup />} />
         </Route>
 
-        {/* <Route path="/profile-page" element = {<ProfilePage />}> 
+        <Route path="/profile-page" element = {<ProfilePage />}> 
             <Route index element = {<Profile />} />
             <Route path="history" element = {<History />} />
-        </Route> */}
+        </Route>
     </Routes>
   )
 }
