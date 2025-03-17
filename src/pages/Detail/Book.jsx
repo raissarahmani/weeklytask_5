@@ -15,7 +15,7 @@ function Book() {
                     <img className='w-[1vw] h-[2vh]' src={Calendar} alt="Date" />
                     <input className='border-none min-w-[100px] py-[2vh] px-[1vw] ml-[0.5vw] cursor-pointer font-semibold outline-none' type="date" />
                 </div>
-                <p className='invisible text-xs text-[red]'>Choose date</p>
+                <p className='validation-msg'>Choose date</p>
             </div>
             <div className='flex flex-col mr-[1vw] w-1/4'>
                 <label for="time">Choose Time</label>
@@ -23,7 +23,7 @@ function Book() {
                     <img className='w-[1vw] h-[2vh]' src={Clock} alt="Time" />
                     <input className='border-none min-w-[100px] py-[2vh] px-[1vw] ml-[0.5vw] cursor-pointer font-semibold outline-none' type="time" />
                 </div>
-                <p className='invisible text-xs text-[red]'>Choose time</p>
+                <p className='validation-msg'>Choose time</p>
             </div>
             <div className='flex flex-col mr-[1vw] w-1/4'>
                 <label for="loc">Choose Location</label>
@@ -44,7 +44,7 @@ function Book() {
                         <option value="Denpasar">Denpasar</option>
                     </select>
                 </div>
-                <p className='invisible text-xs text-[red]'>Choose location</p>
+                <p className='validation-msg'>Choose location</p>
             </div>
             <div>
                 <div className='flex flex-col items-center justify-center bg-transparent border-none'>
@@ -57,33 +57,33 @@ function Book() {
                 <p className='text-xl font-semibold text-[#000] mr-[3vw]'>Choose Cinema</p>
                 <p className='font-subtitle text-[#8692A6]'>39 Result</p>
             </div>
-            <form className='flex flex-row justify-between items-center mt-[1vh]'>
+            <form className='flex flex-row justify-between items-center mt-[1vh] mb-[10vh]'>
                 <div className='cinema-radio'>
                     <input className='hidden' type="radio" name="cinema" id="ebv" value="ebv" />
-                    <label className='flex justify-center items-center w-full h-full cursor-pointer py-[5vh] px-[3vw]' for="ebv">
+                    <label className='label-radio' for="ebv">
                         <img className='w-[12vw] h-[5vh] object-contain' src="../../public/ebv.svg" alt="ebv" />
                     </label>
                 </div>
                 <div className='cinema-radio'>
                     <input className='hidden' type="radio" name="cinema" id="hiflix" value="hiflix" />
-                    <label className='flex justify-center items-center w-full h-full cursor-pointer py-[5vh] px-[3vw]' for="hiflix">
+                    <label className='label-radio' for="hiflix">
                         <img className='w-[12vw] h-[5vh] object-contain' src="../../public/hiflix.png" alt="hiflix" />
                     </label>
                 </div>
                 <div className='cinema-radio'>
                     <input className='hidden' type="radio" name="cinema" id="cineone" value="cineone21" />
-                    <label className='flex justify-center items-center w-full h-full cursor-pointer py-[5vh] px-[3vw]' for="cineone">
+                    <label className='label-radio' for="cineone">
                         <img className='w-[12vw] h-[5vh] object-contain' src="../../public/cineone.svg" alt="cineone21" />
                     </label>
                 </div>
                 <div className='cinema-radio'>
                     <input className='hidden' type="radio" name="cinema" id="ebv2" value="ebv" />
-                    <label className='flex justify-center items-center w-full h-full cursor-pointer py-[5vh] px-[3vw]' for="ebv2">
+                    <label className='label-radio' for="ebv2">
                         <img className='w-[12vw] h-[5vh] object-contain' src="../../public/ebv.svg" alt="ebv" />
                     </label>
                 </div>
             </form>
-            <p className='invisible text-xs text-[red]'>Choose cinema</p>
+            <p className='validation-msg'>Choose cinema</p>
             <div className="flex flex-row items-center justify-center">
                 <div className='pages'>1</div>
                 <div className='pages'>2</div>

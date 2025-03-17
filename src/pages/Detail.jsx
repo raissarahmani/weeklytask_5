@@ -1,16 +1,32 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { getDetail } from '../api/movieList'
 
 import Summary from './Detail/Summary'
 import Book from './Detail/Book'
 
 function Detail() {
+
+  const {id} = useParams()
+  const [movie, setMovie] = useState(null)
+
+  useEffect(() => {
+    async function getPoster () {
+      const posterMovie = await getDetail(id)
+      setMovie(posterMovie)
+    }
+    getPoster()
+  }, [id])
+
+  if (!movie) return <p>Loading...</p>
+
   return (
     <div className='relative'>
-        <section className='relative h-[60vh] bg-[url(../../public/poster8.jpeg)] bg-cover bg-no-repeat bg-[50%_17%]'></section>
+        <section className='relative h-[60vh] bg-cover bg-no-repeat bg-[50%_17%]' style={{backgroundImage: `url(https://image.tmdb.org/t/p/original${movie.poster_path})`}}></section>
         <Summary />
         <section className='pt-[40vh] px-[10vw]'>
             <p className='font-semibold text-xl text-[#000] pt-[5vh]'>Synopsis</p>
-            <p className='text-[#A0A3BD] my-[2vh]'>Thrilled by his experience with the Avengers, Peter returns home, where he lives with his Aunt May, under the watchful eye of his new mentor Tony Stark, Peter tries to fall back into his normal daily routine - distracted by thoughts of proving himself to be more than just your friendly neighborhood Spider-Man - but when the Vulture emerges as a new villain, everything that Peter holds most important will be threatened. </p>
+            <p>{movie.overview}</p>
         </section>
         <Book />
     </div>

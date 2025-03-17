@@ -25,3 +25,23 @@ export async function movieList () {
         console.error (error.message)
     }
 }
+
+export async function getDetail (id) {
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}`)
+    return response.json()
+  }
+  catch (error) {
+    console.error (error.message)
+  }
+}
+
+export async function getCredits (id) {
+  try {
+    const response = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits?api_key=${API_KEY}`)
+    return response.json()
+  }
+  catch (error) {
+    console.error (error.message)
+  }
+}

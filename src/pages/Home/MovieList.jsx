@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { getGenre, movieList } from '../../api/movieList'
 
 import Search from '../../assets/Search.png'
@@ -8,6 +9,7 @@ import ArrowWhite from '../../assets/right-white.png'
 function MovieList() {
 const [movies, setMovies] = useState([])
 const [genreList, setGenreList] = useState({})
+const navigate = useNavigate()
 
 useEffect(() => {
     async function fetchMovie() {
@@ -54,14 +56,14 @@ useEffect(() => {
                         ))}
                     </div>
                     <div className="detail-hover">
-                        <div className='text-[#fff] py-[1vh] my-[0.5vh] text-center w-full border border-solid border-[#fff] rounded-md cursor-pointer'>Details</div>
+                        <div onClick={() => navigate(`/now-playing/movie/${movie.id}`)} className='text-[#fff] py-[1vh] my-[0.5vh] text-center w-full border border-solid border-[#fff] rounded-md cursor-pointer'>Details</div>
                         <div className='text-[#fff] bg-[#1D4ED8] py-[1vh] my-[0.5vh] text-center w-full border border-solid border-[#1D4ED8] rounded-md cursor-pointer'>Buy Ticket</div>
                     </div>
                 </div>
             ))}
         </div>
         <div className="flex flex-row items-center justify-center">
-        <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>1</div>
+            <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>1</div>
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>2</div>
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>3</div>
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>4</div>
