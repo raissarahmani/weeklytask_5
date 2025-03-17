@@ -1,10 +1,16 @@
-import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import Calendar from '../../assets/calendar.png'
 import Clock from '../../assets/time.png'
 import Location from '../../assets/location.png'
 
 function Book() {
+    const navigate = useNavigate()
+    const nextPage = (e) => {
+    e.preventDefault()
+    navigate("/now-playing/order")
+}
+
   return (
     <section className='pt-[5vh] pb-[10vh] px-[10vw]'>
         <p className='text-3xl text-[#121212]'>Book Tickets</p>
@@ -85,12 +91,12 @@ function Book() {
             </form>
             <p className='validation-msg'>Choose cinema</p>
             <div className="flex flex-row items-center justify-center">
-                <div className='pages'>1</div>
-                <div className='pages'>2</div>
-                <div className='pages'>3</div>
-                <div className='pages'>4</div>
+                <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>1</div>
+                <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>2</div>
+                <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>3</div>
+                <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>4</div>
             </div>
-            <div className='flex justify-center'><button className='custom-button bg-[#1D4ED8] w-1/4 mt-[7vh] px-[5vw] py-[1vh] text-[#F8FAFC]'>Book Now</button></div>
+            <div className='flex justify-center'><button onClick={nextPage} className='custom-button bg-[#1D4ED8] w-1/4 mt-[7vh] px-[5vw] py-[1vh] text-[#F8FAFC]'>Book Now</button></div>
         </div>
     </section>
   )
