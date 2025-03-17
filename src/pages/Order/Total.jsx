@@ -1,6 +1,12 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 function Total() {
+    const navigate = useNavigate()
+    const nextPage = (e) => {
+    e.preventDefault()
+    navigate("/now-playing/payment")
+}
+
   return (
     <div className='w-1/4 ml-[1vw]'>
         <section className='rounded-md bg-[#fff]'>
@@ -31,7 +37,7 @@ function Total() {
                 <div className='font-semibold text-[#1D4ED8] text-right'>$30</div>
             </div>
         </section>
-        <button className='custom-button mt-[6vh] py-[2vh] w-full text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
+        <button onClick={nextPage} className='custom-button mt-[6vh] py-[2vh] w-full text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
     </div>
   )
 }
