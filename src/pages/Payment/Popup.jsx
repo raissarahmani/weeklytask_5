@@ -1,6 +1,12 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom"
 
 function Popup() {
+    const navigate = useNavigate()
+    const nextPage = (e) => {
+    e.preventDefault()
+    navigate("/now-playing/success")
+}
+
   return (
     <div className='bg-[#00000099] absolute inset-0 z-[1]'>
         <section className='popup'>
@@ -18,7 +24,7 @@ function Popup() {
             </div>
             <p className='text-[#A0A3BD]'>Pay this payment bill before it is due, <span className='text-[D00707]'>on June 23, 2023.</span> If the bill has not been paid by the specified time, it will be forfeited</p>
             <div className='flex flex-col items-center justify-between my-[7vh] gap-[1vh]'>
-                <button className='custom-button bg-[#1D4ED8] text-[#fff] w-full py-[2vh] font-semibold text-sm'>Check Payment</button>
+                <button onClick={nextPage} className='custom-button bg-[#1D4ED8] text-[#fff] w-full py-[2vh] font-semibold text-sm'>Check Payment</button>
                 <button className='custom-button text-[#1D4ED8] bg-[#fff] w-full py-[2vh] font-semibold text-sm'>Pay Later</button>
             </div>
         </section>
