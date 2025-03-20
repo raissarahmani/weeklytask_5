@@ -4,6 +4,7 @@ import Hero from "./Home/Hero";
 import Intro from "./Home/Intro";
 import Nowplaying from "./Home/NowPlaying";
 import Upcoming from "./Home/Upcoming";
+import NewsLetter from "../components/Newsletter"
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
     <Intro />
     <Nowplaying />
     <Upcoming />
+    <NewsLetter />
     </>
   )
 }
