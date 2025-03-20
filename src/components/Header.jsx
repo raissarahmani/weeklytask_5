@@ -1,32 +1,32 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 import Menu from '../assets/Menu.png'
 
 function Header() {
   return (
-    <header className='flex flex-row items-center bg-[#fff] py-[5vh] px-[10vw] sticky top-0 z-[10]'>
-        <div className='w-3/20'>
-            <img className='w-7/10' src="../../public/tickitz2.png" alt="Logo Tickitz" />
+    <header className='flex flex-row justify-between items-center bg-[#fff] py-[5vh] px-[10vw] sticky top-0 z-[10]'>
+        <div className='w-1/2 md:w-3/20'>
+            <img className='w-1/2 md:w-7/10' src="../../public/tickitz2.png" alt="Logo Tickitz" />
         </div>
-        <nav className='flex flex-row justify-evenly w-3/5'>
-            <Link to='/'>Home</Link>
-            <Link to='now-playing'>Movie</Link>
-            <Link to='/now-playing/detail'>Buy Ticket</Link>
+        <nav className='hidden md:flex flex-row justify-evenly w-3/5'>
+            <p className='hover:text-[#1D4ED8]'><Link to='/'>Home</Link></p>
+            <p className='hover:text-[#1D4ED8]'><Link to='now-playing'>Movie</Link></p>
+            <p className='hover:text-[#1D4ED8]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
         </nav>
-        <div className='w-1/4 flex flex-row justify-right'>
+        <div className='hidden md:flex flex-row justify-right w-1/4'>
             <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
             <button className='header-button mx-[0.5vw] bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
         </div>
-        <div className='hidden'>
+        <div className='md:hidden relative cursor-pointer'>
             <img src={Menu} alt="Menu" />
-            <div class="hamburger-menu">
-                <nav>
-                    <p>Home</p>
-                    <p>Movie</p>
-                    <p>Buy Ticket</p>
-                    <p>Sign In</p>
-                    <p>Sign Up</p>
+            <div className='hidden absolute top-[5vh] right-0 bg-[#fff] py-[2vh] px-[5vw] rounded-lg w-1/3'>
+                <nav className='cursor-pointer'>
+                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/'>Home</Link></p>
+                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='now-playing'>Movie</Link></p>
+                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
+                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/auth'>Sign In</Link></p>
+                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></p>
                 </nav>
             </div>
         </div>
