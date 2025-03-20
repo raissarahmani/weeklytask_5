@@ -12,9 +12,9 @@ function AdminDashboard() {
         <div className='w-3/20'>
             <img className='w-7/10' src="../../public/tickitz2.png" alt="Logo Tickitz"/>
         </div>
-        <nav className='flex flex-row justify-evenly w-3/5 text-sm hover:text-[#1D4ED8] cursor-pointer'>
-            <Link to='/admin'>Dashboard</Link>
-            <Link to='movie-list'>Movie</Link>
+        <nav className='flex flex-row justify-evenly w-3/5 text-sm'>
+            <p className='hover:text-[#1D4ED8] cursor-pointer'><Link to='/admin'>Dashboard</Link></p>
+            <p className='hover:text-[#1D4ED8] cursor-pointer'><Link to='movie-list'>Movie</Link></p>
         </nav>
         <div className='flex flex-row justify-right items-center w-1/4'>
             <div className='text-sm'>Location</div>
