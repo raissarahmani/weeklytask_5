@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router";
 
 import Dashboard from './Dashboard';
 import Home from './pages/Home';
@@ -18,6 +18,11 @@ import ProfilePage from './ProfilePage'
 import Profile from './pages/Profile'
 import History from './pages/History'
 
+import AdminPage from './AdminPage';
+import Admin from './pages/Admin';
+import AdminMovie from './pages/AdminMovie';
+import AdminAddMovie from './pages/AdminAddMovie'
+
 function Router() {
   return (
     <Routes>
@@ -25,7 +30,7 @@ function Router() {
             <Route index element = {<Home />} />
             <Route path="now-playing" element = {<HomeRouter />}>
               <Route index element = {<Home2 />} />
-              <Route path="detail" element = {<Detail />} />
+              <Route path="movie/:id" element = {<Detail />} />
               <Route path="order" element = {<Order />} />
               <Route path="payment" element = {<Payment />} />
               <Route path="success" element = {<Success />} />
@@ -40,6 +45,12 @@ function Router() {
         <Route path="/profile-page" element = {<ProfilePage />}> 
             <Route index element = {<Profile />} />
             <Route path="history" element = {<History />} />
+        </Route>
+
+        <Route path="/admin" element = {<AdminPage />} >
+        <Route index element = {<Admin />} />
+            <Route path="movie-list" element = {<AdminMovie />} />
+            <Route path="add-movie" element = {<AdminAddMovie />} />
         </Route>
     </Routes>
   )
