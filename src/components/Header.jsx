@@ -1,9 +1,15 @@
-import React from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router'
 
 import Menu from '../assets/Menu.png'
 
 function Header() {
+const [IsMenuVisible, setIsMenuVisible] = useState(false)
+
+function showMenu() {
+    setIsMenuVisible((prev) => !prev)
+}
+
   return (
     <header className='flex flex-row justify-between items-center bg-[#fff] py-[5vh] px-[10vw] sticky top-0 z-[10]'>
         <div className='w-1/2 md:w-3/20'>
@@ -18,15 +24,15 @@ function Header() {
             <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
             <button className='header-button mx-[0.5vw] bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
         </div>
-        <div className='md:hidden relative cursor-pointer'>
+        <div onClick={showMenu} className='md:hidden relative cursor-pointer'>
             <img src={Menu} alt="Menu" />
-            <div className='hidden absolute top-[5vh] right-0 bg-[#fff] py-[2vh] px-[5vw] rounded-lg w-1/3'>
+            <div className={`${IsMenuVisible ? "visible" : "invisible"} absolute top-[5vh] right-0 shadow-lg bg-[#fff] py-[2vh] px-[5vw] rounded-lg w-[40vw]`}>
                 <nav className='cursor-pointer'>
-                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/'>Home</Link></p>
-                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='now-playing'>Movie</Link></p>
-                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
-                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/auth'>Sign In</Link></p>
-                    <p className='hover:bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></p>
+                    <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/'>Home</Link></p>
+                    <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='now-playing'>Movie</Link></p>
+                    <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
+                    <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/auth'>Sign In</Link></p>
+                    <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/auth/register'>Sign Up</Link></p>
                 </nav>
             </div>
         </div>
