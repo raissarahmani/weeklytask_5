@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 import { getGenre, movieList } from '../../api/movieList'
 
 import Search from '../../assets/Search.png'
@@ -25,8 +25,8 @@ useEffect(() => {
 
   return (
     <section className='py-[4vh] px-[10vw]'>
-        <div className='flex flex-row my-[5vh]'>
-            <div className='w-7/20'>
+        <div className='flex flex-col md:flex-row my-[5vh]'>
+            <div className='w-full md:w-7/20'>
                 <p className='font-semibold text-[#4E4B66]'>Cari Event</p>
                 <label for="query" hidden></label>
                 <div className='border-input flex flex-row'>
@@ -45,7 +45,7 @@ useEffect(() => {
                 </div>
             </div>
         </div>
-        <div className="grid grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {movies.map((movie) => (
                 <div key={movie.id} className="container-viewall relative">
                     <img className='w-full h-full object-cover rounded-lg' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title}/>
@@ -62,7 +62,7 @@ useEffect(() => {
                 </div>
             ))}
         </div>
-        <div className="flex flex-row items-center justify-center">
+        <div className="hidden md:flex flex-row items-center justify-center mt-[5vh]">
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>1</div>
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>2</div>
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>3</div>
