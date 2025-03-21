@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router";
 import Or from './Auth/Or'
 import Socmed from './Auth/Socmed'
 
@@ -83,8 +83,8 @@ const showPassword = (e) => {
   return (
     <div>
         <div className='mt-[5vh] mb-[1vh] mx-[2vw]'>
-            <div className='font-semibold text-3xl my-[1vh] mx-[1vw]'>Welcome Back👋</div>
-            <p className='text-lg text-[#A0A3BD] mt-[5vh] mb-[1vh] mx-[1vw]'>Sign in with your data that you entered during your registration</p>
+            <div className='font-semibold text-2xl md:text-3xl my-[1vh] mx-[1vw]'>Welcome Back👋</div>
+            <p className='md:text-lg text-[#A0A3BD] mt-[5vh] mb-[1vh] mx-[1vw]'>Sign in with your data that you entered during your registration</p>
         </div>
         <form onSubmit={loginValid}  className='relative mt-[3vh] mb-[1vh] px-[3vw] pt-[3vh] pb-[1vh] font-normal text-[#4E4B66]'>
             <label for="email">Email</label> <br/>
@@ -96,7 +96,7 @@ const showPassword = (e) => {
                 <img onClick={showPassword} className='cursor-pointer' src={Show} alt="Show Password"/>
             </div>
             <p className={`validation-msg ${passIsVisible && passMsg ? "visible" : "invisible"}`}>{passMsg}</p>
-            <p className='text-right'><a href="">Forgot your password?</a></p>
+            <p className='text-right text-sm'><a href="">Forgot your password?</a></p>
             <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal text-sm my-[3vh] py-[2vh] w-full' type="submit"> Login </button>
         </form> 
         <Or />

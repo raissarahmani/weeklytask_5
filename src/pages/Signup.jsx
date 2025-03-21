@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router'
 
-import Steps from '../components/Steps'
+import Steps from './Auth/Steps'
 import Or from './Auth/Or'
 import Socmed from './Auth/Socmed'
 
@@ -98,7 +98,7 @@ function Signup() {
           <p className={`validation-msg ${checkedIsVisible && checkboxMsg ? "visible" : "invisible"}`}>{checkboxMsg}</p>
           <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal text-sm my-[3vh] py-[2vh] w-full' type="submit"> Join For Free Now </button>
       </form>
-      <div className='text-center mb-[5vh]'>
+      <div className='text-center text-sm mb-[5vh]'>
           <p>Already have an account? <a className='text-[blue]' href="signin.jsx">Log In</a></p>
       </div>
       <Or />
