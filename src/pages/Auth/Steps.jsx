@@ -8,7 +8,7 @@ function Steps() {
             <p className='flex justify-center font-semibold text-sm text-[#4E4B66] mx-[2vw]'>Fill Form</p>
         </div>
         <div className='flex items-center justify-center'>
-            <div className='flex-'>----------</div>
+            <div className='flex-1'>----------</div>
             <div>
               <div className='steps bg-[#A0A3BD]'>2</div>
               <p className='flex justify-center font-semibold text-sm text-[#A0A3BD] mx-[2vw]'>Activate</p>
