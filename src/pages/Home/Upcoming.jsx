@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import { getGenre, upcomingList } from '../../api/upcoming'
 
 import ArrowLeft from '../../assets/left-white.png'
@@ -7,7 +7,6 @@ import ArrowRight from '../../assets/right-white.png'
 function Upcoming() {
 const [movie, setMovie] = useState([])
 const [genreList, setGenreList] = useState({})
-const buttonRef = useRef(null)
 
 useEffect(() => {
     async function fetchUpcoming () {
@@ -27,30 +26,21 @@ useEffect(() => {
     fetchUpcoming()
 }, [])
 
-const scrollMovies = (direction) => {
-    if (buttonRef.current) {
-      buttonRef.current.scrollBy({
-        right: direction === "right" ? 300 : -300,
-        behavior: "smooth",
-      });
-    }
-  };
-
   return (
     <section className='py-[7vh] px-[10vw] bg-[#fff]'>
         <p className='font-subtitle text-[#1D4ED8] text-center md:text-left'>UPCOMING MOVIES</p>
         <div className='flex flex-row justify-between'>
-            <p className='text-3xl md:text-4xl text-center md:text-left text-[#121212] font-normal my-[3vh]'>Exciting Movie Coming Soon</p>
+            <p class='text-3xl md:text-4xl text-center md:text-left text-[#121212] font-normal my-[3vh]'>Exciting Movie Coming Soon</p>
             <div className='hidden md:flex flex-row gap-[0.5vw]'>
-                <div onClick={() => scrollMovies("left")} className="icon-container hover:bg-[#1D4ED8]">
+                <div className="icon-container hover:bg-[#1D4ED8]">
                     <img className='absolute top-1/4 left-1/4' src={ArrowLeft} alt="Previous" />
                 </div>
-                <div  onClick={() => scrollMovies("right")} className="icon-container hover:bg-[#1D4ED8]">
+                <div className="icon-container hover:bg-[#1D4ED8]">
                     <img className='absolute top-1/4 right-1/4' src={ArrowRight} alt="Next" />
                 </div>
             </div>
         </div>
-        <div ref={buttonRef} className='overflow-x-auto overflow-y-hidden w-full'>
+        <div className='overflow-x-auto overflow-y-hidden w-full'>
             <div className="grid grid-flow-col gap-[1vw] w-max">
                 {movie.map((movie) => (
                 <div key={movie.id} className="container-movie">
