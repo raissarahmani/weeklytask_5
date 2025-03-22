@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 import Dropdown from '../assets/dropdown.png'
 import Search from '../assets/Search.png'
@@ -23,7 +23,7 @@ function HeaderProfile() {
                 <img className='object-contain w-[2vw] h-[3vh]' src={Dropdown} alt=""/>
                 <img className='object-contain w-[2vw] h-[3vh]' src={Search} alt=""/>
             </div>
-            <div className='rounded-full'><Link to='/profile-page'><img className='object-cover  h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></Link></div>
+            <div className='rounded-full'><Link to='/profile-page'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></Link></div>
         </div>
         <div className='hidden'>
             <img src={Menu} alt="Menu" />

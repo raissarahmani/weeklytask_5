@@ -33,7 +33,7 @@ function Admin() {
                         <p className='validation-msg'>Choose periode</p>
                     </div>
                     <div className='w-1/3'>
-                        <button className='custom-button bg-[#1D4ED8] text-[#fff] py-[1.5vh] px-[1vw] w-full' type="submit">Filter</button>
+                        <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal py-[1.5vh] px-[1vw] w-full' type="submit">Filter</button>
                     </div>
                 </form>
             </div>
@@ -115,7 +115,7 @@ function Admin() {
                         <p className='validation-msg'>Choose location</p>
                     </div>
                     <div className='w-1/3'>
-                        <button className='custom-button bg-[#1D4ED8] text-[#fff] py-[1.5vh] px-[1vw] w-full' type="button">Filter</button>
+                        <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal py-[1.5vh] px-[1vw] w-full' type="button">Filter</button>
                     </div>
                 </form>
             </div>

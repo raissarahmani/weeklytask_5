@@ -1,9 +1,15 @@
-import React from 'react'
+import { useNavigate } from 'react-router'
 
 import QR from '../../assets/qr.png'
 import Download from '../../assets/Download.png'
 
 function Ticket() {
+    const navigate = useNavigate()
+    const nextPage = (e) => {
+    e.preventDefault()
+    navigate("/profile-page")
+}
+
   return (
     <section className='w-2/5 py-[10vh] px-[10vw]'>
         <div className='bg-[#fff] py-[5vh] px-[3vw]'>
@@ -44,7 +50,7 @@ function Ticket() {
                 <img className='w-1/10 h-1/10 mr-[1vw]' src={Download} alt="Download" />
                 <p>Download</p>
             </button>
-            <button className='custom-button flex flex-row items-center justify-center font-semibold text-sm text-[#fff] bg-[#1D4ED8] py-[0.5vw]'>Done</button>
+            <button onClick={nextPage} className='custom-button flex flex-row items-center justify-center font-semibold text-sm text-[#fff] bg-[#1D4ED8] py-[0.5vw]'>Done</button>
         </div>
     </section>
   )

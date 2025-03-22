@@ -11,7 +11,7 @@
     :root {
         --font-default: 'Mulish', 'sans-serif';
         background-color: var(--color-base);
-        @apply bg-blue-400;
+        /* @apply bg-blue-400; */
     }
     header {
         @apply text-sm font-normal text-[#0F172A];
@@ -36,23 +36,23 @@
         @apply rounded-full w-[7vh] h-[7vh] relative bg-[#1d4ed833]
     }
     .container-movie {
-        @apply w-1/5 h-full rounded-md relative
+        @apply flex flex-col w-[250px] h-[500px] rounded-md relative z-0
     }
     .recomended {
         background-color: var(--color-primary);
-        @apply rounded-r-3xl absolute top-1/50 text-sm text-[#fff] py-[0.5vh] px-[1.5vw] z-[1]
+        @apply rounded-r-3xl absolute top-2 text-sm text-[#fff] py-[0.5vh] px-[1.5vw] z-1
     }
     .movie {
-        @apply w-full h-full rounded-md object-cover cursor-pointer
+        @apply w-[250px] h-[400px] rounded-md object-cover cursor-pointer
     }
     .movie-title {
-        @apply font-bold text-2xl text-[#14142B] text-left my-[2vh] max-w-4/5 whitespace-nowrap overflow-hidden text-ellipsis
+        @apply font-semibold text-2xl text-[#14142B] text-left my-[2vh] max-w-[200px] whitespace-nowrap overflow-hidden text-ellipsis
     }
     .movie-genre {
         @apply bg-[#a0a3bd1a] text-[#A0A3BD] rounded-3xl mr-[1vw] p-[1.5vh] text-left
     }
     .detail-hover {
-        @apply visible absolute top-0 left-0 flex flex-col items-center justify-center bg-[#00000066] object-cover w-full rounded-md px-[3vw] z-[2]
+        @apply absolute top-0 left-0 flex flex-col items-center justify-center object-cover w-full h-[400px] rounded-md bg-[#00000066] opacity-0 hover:opacity-100 px-[3vw] z-2
     }
     .font-text {
         @apply font-medium text-sm 
@@ -62,10 +62,7 @@
         @apply border border-solid rounded-sm px-[1vw] my-[2vh];
     }
     .genre-option {
-        @apply font-medium text-sm text-[#4E4B66] bg-[#fff] rounded-lg my-[1vh] mx-[1vw] py-[1vh] px-[2vw];
-    }
-    .movie-now {
-        @apply grid grid-cols-4 grid-rows-3 items-center justify-between mb-[15vh];
+        @apply font-medium text-xs md:text-sm text-[#4E4B66] bg-[#fff] rounded-lg my-[1vh] mx-[0.5vw] md:mx-[1vw] py-[1vh] px-[2vw];
     }
     .container-viewall {
         @apply w-4/5 h-7/10 rounded-md relative
@@ -75,31 +72,27 @@
         @apply border border-solid rounded-full text-lg text-[#4E4B66] mx-[0.5vw] text-center w-[5vh] h-[5vh] cursor-pointer relative
     }
     .summary {
-        @apply grid grid-rows-[60vh_30vh] items-center absolute top-17/100 left-1/10;
+        @apply grid grid-cols-1 grid-rows-[90vh_10vh] md:grid-rows-[60vh_30vh] items-center absolute top-1/20 md:top-17/100 left-0 md:left-1/10;
         grid-template-areas:
         'a .'
         'a b';
     }
     .cinema-radio {
         border-color: var(--color-tertiary);
-        @apply border-2 border-solid items-center justify-center cursor-pointer
+        @apply border-2 border-solid items-center justify-center w-full cursor-pointer
     }
     .label-radio {
-        @apply flex justify-center items-center w-full h-full cursor-pointer py-[5vh] px-[3vw]
+        @apply flex justify-center items-center w-full h-full cursor-pointer py-[5vh] px-[3vw] hover:bg-[#1D4ED8] peer-checked:bg-[#1D4ED8]
     }
     .steps {
         @apply flex justify-center items-center relative w-[3vw] h-[3vw] rounded-full font-medium text-[#fff] mt-[5vh] mx-[4vw]
     }
     .ticket {
         border-color: var(--color-tertiary);
-        @apply grid items-center h-[30vh] rounded-xs pt-[2vh] px-[2vw] border border-solid;
-        grid-template-areas: 
-        'a b .'
-        'a c .'
-        'a d e';
+        @apply grid grid-cols-1 md:grid-cols-3 grid-rows-7 md:grid-rows-3 items-center h-[80vh] md:h-[30vh] rounded-xs pt-[2vh] px-[2vw] border border-solid;
     }
     .seats {
-        @apply w-[20px] h-[20px] rounded-sm my-[1vh] mx-[0.25vw] font-normal text-sm text-[#4E4B66] text-center bg-[#D6D8E7] cursor-pointer;
+        @apply w-[17px] md:w-[20px] h-[17px] md:h-[20px] rounded-sm my-[1vh] mx-[0.25vw] font-normal text-sm text-[#4E4B66] text-center bg-[#D6D8E7] cursor-pointer;
     }
     .form-input {
         @apply font-normal text-[#000] border border-solid w-full my-[1vh] py-[2vh] px-[1vw]
@@ -118,6 +111,22 @@
     .inner-shadow {
         box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2)
     }
+    .history {
+        @apply grid my-[7vh] py-[7vh] px-[3vw] rounded-3xl bg-[#fff];
+        grid-template-areas: 
+        'a a'
+        'b c'
+        'g g';
+    }
+    .history-child {
+        @apply grid col-span-2 border-b border-solid border-[#DEDEDE];
+        grid-template-areas: 
+        'd f'
+        'e f';
+    }
+    .receipt {
+        @apply grid grid-cols-[15vw_10vw_7vw_10vw_7vw] items-center w-7/10;
+    }
     .validation-msg {
         @apply visible font-extralight text-xs text-[red] mb-[2vh]
     }
@@ -133,17 +142,7 @@
         @apply border border-solid rounded-lg font-semibold text-lg cursor-pointer
     }
     .footer-sect {
-        @apply grid;
-        grid-template-columns: 40% 15% 25% 20%;
-        grid-template-areas: 
-        'a c h m'
-        'a c h m'
-        '. c h m'
-        'b c h m'
-        '. c h m'
-        '. . h m'
-        '. . h m'
-        '. . . m';
+        @apply grid grid-cols-1 md:grid-cols-[40%_15%_25%_20%] grid-rows-[30vh_20vh_20vh_20vh] md:grid-rows-1;
     }
 }
 
