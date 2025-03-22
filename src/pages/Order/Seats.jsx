@@ -1,10 +1,17 @@
-import React from 'react'
+import { useNavigate } from 'react-router'
 
 import Down from '../../assets/Arrow-black.png'
 import Right from '../../assets/right-black.png'
 
 function Seats() {
+    const navigate = useNavigate()
+    const nextPage = (e) => {
+    e.preventDefault()
+    navigate("/now-playing/payment")
+}
+
   return (
+    <>
     <section className='w-full md:w-3/4 rounded-md bg-[#fff] py-[5vh] px-[2vw]'>
         <div className='ticket'>
             <div className='col-span-1 row-span-3 flex justify-center items-center h-full md:overflow-hidden md:pr-[2vw] pb-[2vh]'>
@@ -215,6 +222,38 @@ function Seats() {
             </div>
         </div>
     </section>
+    <div className='hidden md:block w-1/4 ml-[1vw]'>
+        <section className='rounded-md bg-[#fff]'>
+            <div className='pt-[5vh] px-[5vw]'>
+                <img src='../../../public/cineone.svg' alt="cineone21" />
+            </div>
+            <p className='py-[1vh] px-[2vw] text-center font-semibold'>CineOne 21 Cinema</p>
+            <div className='py-[2vh] px-[2vw]'>
+                <div className='flex flex-row justify-between mb-[3vh]'>
+                    <div className='text-xs text-[#6B6B6B]'>Movie selected</div>
+                    <div className='font-semibold text-xs text-right text-[#14142B]'>Spider-Man: Homecoming</div>
+                </div>
+                <div className='flex flex-row justify-between mb-[3vh]'>
+                    <div className='text-xs text-[#6B6B6B]'>Tuesday, 07 July 2020</div>
+                    <div className='font-semibold text-xs text-center text-[#14142B]'>13.00</div>
+                </div>
+                <div className='flex flex-row justify-between mb-[3vh]'>
+                    <div className='text-xs text-[#6B6B6B]'>One ticket price</div>
+                    <div className='font-semibold text-xs text-center text-[#14142B]'>$10</div>
+                </div>
+                <div className='flex flex-row justify-between mb-[3vh]'>
+                    <div className='text-xs text-[#6B6B6B]'>Seat choosed</div>
+                    <div className='font-semibold text-xs text-center text-[#14142B]'>C4, C5, C6</div>
+                </div>
+            </div>
+            <div className='flex flex-row justify-between items-center py-[2vh] px-[2vw] border border-solid border-[#E6E6E6]'>
+                <div>Total Payment</div>
+                <div className='font-semibold text-[#1D4ED8] text-right'>$30</div>
+            </div>
+        </section>
+        <button onClick={nextPage} className='custom-button mt-[6vh] py-[2vh] w-full text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
+    </div>
+    </>
   )
 }
 

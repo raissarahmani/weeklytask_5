@@ -1,7 +1,6 @@
 import React from 'react'
 import Steps from './Order/Steps'
 import Seats from './Order/Seats'
-import Total from './Order/Total'
 
 function Order() {
   return (
@@ -9,7 +8,6 @@ function Order() {
       <Steps />
       <div className='flex flex-row'>
         <Seats />
-        <Total />
       </div>
     </div>
   )
