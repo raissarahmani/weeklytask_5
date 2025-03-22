@@ -1,12 +1,13 @@
 import { useNavigate } from 'react-router'
 import { useState, useEffect } from 'react'
+import useLocalStorage from '../../hook/useLocalStorage'
 
 import Calendar from '../../assets/calendar.png'
 import Clock from '../../assets/time.png'
 import Location from '../../assets/location.png'
 
 function Book() {
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useLocalStorage("bookingDetails", {
         date: "",
         time: "",
         location: "",
@@ -38,6 +39,7 @@ function Book() {
         setIsSubmitted(true)
 
         if (isFormValid) {
+            localStorage.setItem("bookingDetails", JSON.stringify(formData))
             navigate("/now-playing/order")
         }
     }
@@ -85,7 +87,7 @@ function Book() {
             </div>
             <div>
                 <div className='flex flex-col items-center justify-center bg-transparent border-none'>
-                    <button type='submit' className='custom-button bg-[#1D4ED8] mt-[3.5vh] py-[2vh] px-[2vw] rounded-sm text-[#fff] w-full'>Filter</button>
+                    <button className='custom-button bg-[#1D4ED8] mt-[3.5vh] py-[2vh] px-[2vw] rounded-sm text-[#fff] w-full'>Filter</button>
                 </div>
             </div>
         </form>
