@@ -1,5 +1,5 @@
 import React from 'react'
-import Steps from '../components/Steps'
+import Steps from './Order/Steps'
 import Seats from './Order/Seats'
 import Total from './Order/Total'
 
