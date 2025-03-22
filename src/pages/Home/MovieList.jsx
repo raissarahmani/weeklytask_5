@@ -63,7 +63,7 @@ useEffect(() => {
                             <p key={id} className='movie-genre'> {genreList[id] || "Unknown"} </p>
                         ))}
                     </div>
-                    <div className="detail-hover">
+                    <div className="detail-hover h-[265px]">
                         <div onClick={() => navigate(`/now-playing/movie/${movie.id}`)} className='text-[#fff] py-[1vh] my-[0.5vh] text-center w-full border border-solid border-[#fff] rounded-md cursor-pointer'>Details</div>
                         <div className='text-[#fff] bg-[#1D4ED8] py-[1vh] my-[0.5vh] text-center w-full border border-solid border-[#1D4ED8] rounded-md cursor-pointer'>Buy Ticket</div>
                     </div>
