@@ -113,12 +113,12 @@ function Book() {
                     <div className='cinema-radio'>
                         <input onChange={formHandler} className='hidden peer' type="radio" name="cinema" id="cineone" value="cineone21" checked={formData.cinema === "cineone21"} />
                         <label className='label-radio' for="cineone">
-                            <img className='w-[12vw] h-[5vh] object-contain' src="../../public/cineone.svg" alt="cineone21" />
+                            <img className='w-[12vw] h-[5vh] object-contain' src="../../public/cineone21.svg" alt="cineone21" />
                         </label>
                     </div>
                     <div className='cinema-radio'>
-                        <input onChange={formHandler} className='hidden peer' type="radio" name="cinema" id="ebv-premiere" value="ebv-premiere" checked={formData.cinema === "ebv-premiere"} />
-                        <label className='label-radio' for="ebv-premiere">
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="cinema" id="ebv" value="ebv" checked={formData.cinema === "ebv-premiere"} />
+                        <label className='label-radio' for="ebv">
                             <img className='w-[12vw] h-[5vh] object-contain' src="../../public/ebv.svg" alt="ebv" />
                         </label>
                     </div>

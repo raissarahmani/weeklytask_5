@@ -23,7 +23,7 @@ function Footer() {
             <div className='md:px-[1vw] md:block grid grid-cols-3 grid-rows-2 h-[20vh]'>
                 <div className='text-[#000] font-semibold md:mb-[4vh] col-span-3 row-span-1'>Our Sponsor</div>
                 <img className='w-2/3 md:w-1/2 h-1/2 md:h-1/3' src="../../public/ebv.svg" alt="ebv" />
-                <img className='md:my-[4vh] w-2/3 h-1/2 md:h-1/5' src="../../public/cineone.svg" alt="cineone21" />
+                <img className='md:my-[4vh] w-2/3 h-1/2 md:h-1/5' src="../../public/cineone21.svg" alt="cineone21" />
                 <img className='w-2/3 md:w-1/3 h-1/2 md:h-1/5 md:pl-[0.5vw]' src="../../public/hiflix.png" alt="hiflix" />
             </div>
             <div>
