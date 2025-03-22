@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router'
 import {getDetail, getCredits} from '../../api/movieList'
 
 function Summary() {
@@ -29,19 +29,19 @@ function Summary() {
 
   return (
     <div className='summary'>
-        <section className='rounded-md'>
-            <img className='object-contain w-full h-full' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
+        <section className='flex md:block justify-center items-center rounded-md col-span-2 md:col-span-1 row-span-1'>
+            <img className='object-contain w-2/3 md:w-full h-full rounded-md' src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
         </section>
-        <section className='pl-[3vw] mt-[20vh]'>
-            <p className='font-bold text-3xl text-[#14142B]'>{movie.title}</p>
-            <div className='flex flex-row my-[2vh]'>
+        <section className='px-[5vw] md:px-0 md:pl-[3vw] mt-[50vh] md:mt-[30vh]'>
+            <p className='font-bold text-xl md:text-3xl text-center md:text-left text-[#14142B]'>{movie.title}</p>
+            <div className='flex flex-row justify-center md:justify-start my-[2vh]'>
               {movie.genres.map((genre) => (
                 <div key={genre.id} className="movie-genre border border-solid border-[#a0a3bd1a] px-2 py-1 mx-1 rounded-md">
                   {genre.name}
                 </div>
                 ))}
             </div>
-            <div className='w-[70vw] grid grid-cols-2 grid-rows-2'>
+            <div className='w-full md:w-[70vw] grid grid-cols-2 md:grid-cols-[20vw_40vw] grid-rows-[15vh_20vh] md:grid-rows-2'>
                 <div>
                     <p className='text-sm text-[#8692A6]'>Release date</p>
                     <p className='text-[121212]'>{new Date(movie.release_date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}</p>
