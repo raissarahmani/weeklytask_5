@@ -7,7 +7,7 @@ import Star from '../../assets/star.png'
 
 function Acc() {
   return (
-    <section className='w-1/4 rounded-[24px] bg-[#fff]'>
+    <section className='hidden md:block w-1/4 rounded-[24px] bg-[#fff]'>
         <div className='py-[7vh] px-[3vw] border-b border-solid border-[#DEDEDE]'>
             <div className='flex flex-row justify-between'>
                 <p className='text-[#4E4B66]'>INFO</p>
