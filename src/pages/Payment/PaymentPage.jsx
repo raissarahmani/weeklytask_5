@@ -32,8 +32,9 @@ function PaymentPage() {
     }
 
     useEffect(() => {
-        let newError = {}
+        setFormPayment({ name: "", email: "", phone: "", payment: "" })
 
+        let newError = {}
         if(!formPayment.name) newError.name = "Data should be filled"
         
         if(!formPayment.email) {
@@ -51,7 +52,7 @@ function PaymentPage() {
 
         setError(newError)
         setIsFormValid(Object.keys(newError).length === 0)
-    }, [formPayment])
+    }, [])
 
     const submitForm = (e) => {
         e.preventDefault()

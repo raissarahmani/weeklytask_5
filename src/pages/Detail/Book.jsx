@@ -23,8 +23,9 @@ function Book() {
     }
 
     useEffect(() => {
-        let newError = {}
+        setFormData({ date: "", time: "", location: "", cinema: "" })
 
+        let newError = {}
         if(!formData.date) newError.date = "Data should be filled"
         if(!formData.time) newError.time = "Data should be filled"
         if(!formData.location) newError.location = "Data should be filled"
@@ -32,7 +33,7 @@ function Book() {
 
         setError(newError)
         setIsFormValid(Object.keys(newError).length === 0)
-    }, [formData])
+    }, [])
 
     const submitForm = (e) => {
         e.preventDefault()
@@ -117,7 +118,7 @@ function Book() {
                         </label>
                     </div>
                     <div className='cinema-radio'>
-                        <input onChange={formHandler} className='hidden peer' type="radio" name="cinema" id="ebv" value="ebv" checked={formData.cinema === "ebv-premiere"} />
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="cinema" id="ebv" value="ebv" checked={formData.cinema === "ebv"} />
                         <label className='label-radio' for="ebv">
                             <img className='w-[12vw] h-[5vh] object-contain' src="../../public/ebv.svg" alt="ebv" />
                         </label>
