@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router'
-
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router'
+import { useDispatch } from 'react-redux'
+import { register } from '../redux/slices/authSlice'
 import Steps from './Auth/Steps'
 import Or from './Auth/Or'
 import Socmed from './Auth/Socmed'
@@ -19,18 +20,14 @@ function Signup() {
   const [checkboxMsg, setCheckboxMsg] = useState("Required")
   const [checkedIsVisible, setCheckedIsVisible] = useState(false)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   
-  useEffect(() => {
-    if (!isChecked) {
-      setCheckedIsVisible(true)
-      setCheckboxMsg("Required")
-    } else {
-      setCheckedIsVisible(false)
-    }
-  }, [isChecked])
-
-  const register = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault()
+
+    setEmailIsVisible(false)
+    setPassIsVisible(false)
+    setCheckedIsVisible(false)
   
     if (!email) {
       setEmailIsVisible(true)
@@ -66,24 +63,26 @@ function Signup() {
         return
       }
     }
-  
-    if (email && pass.length >= 8 && isChecked === true) {
-      localStorage.setItem("user", JSON.stringify({email, pass}))
-      alert("Register success. Please sign in")
-      navigate("/auth")
+
+    if (!isChecked) {
+      setCheckedIsVisible(true)
+      setCheckboxMsg("Required")
+      return
     }
-    
+  
+    dispatch(register({email, pass}))
+    alert("Register success. Please sign in")
+    navigate("/auth")
   }
 
-  const showPassword = (e) => {
-    e.preventDefault()
+  const showPassword = () => {
     setShowPass((showPass) => !showPass)
   }
 
   return (
     <div>
       <Steps />
-      <form onSubmit={register} className='relative mt-[3vh] mb-[1vh] px-[3vw] pt-[3vh] pb-[1vh] font-normal text-[#4E4B66]'>
+      <form onSubmit={handleRegister} className='relative mt-[3vh] mb-[1vh] px-[3vw] pt-[3vh] pb-[1vh] font-normal text-[#4E4B66]'>
           <label for="email">Email</label> <br/>
           <input onChange={(e) => setEmail(e.target.value)} className='form-input border-[#DEDEDE]' type="email" name="email" value={email} placeholder="Enter your email"/> <br/>
           <p className={`validation-msg ${emailIsVisible && emailMsg ? "visible" : "invisible"}`}>{emailMsg}</p>
@@ -99,7 +98,7 @@ function Signup() {
           <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal text-sm my-[3vh] py-[2vh] w-full' type="submit"> Join For Free Now </button>
       </form>
       <div className='text-center text-sm mb-[5vh]'>
-          <p>Already have an account? <a className='text-[blue]' href="signin.jsx">Log In</a></p>
+          <p>Already have an account? <Link to='/auth'>Log In</Link></p>
       </div>
       <Or />
       <Socmed />

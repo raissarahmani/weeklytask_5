@@ -1,10 +1,19 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { useDispatch, useSelector } from 'react-redux'
+import { logout } from '../redux/slices/authSlice'
 
-import Menu from '../assets/Menu.png'
+import Pp from '../assets/pp.png'
+import Menu from '../assets/menu.png'
 
 function Header() {
 const [IsMenuVisible, setIsMenuVisible] = useState(false)
+const dispatch = useDispatch()
+const user = useSelector((state) => state.auth.user)
+
+const handleLogout = () => {
+    dispatch(logout())
+}
 
 function showMenu() {
     setIsMenuVisible((prev) => !prev)
@@ -20,9 +29,14 @@ function showMenu() {
             <p className='hover:text-[#1D4ED8]'><Link to='now-playing'>Movie</Link></p>
             <p className='hover:text-[#1D4ED8]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
         </nav>
-        <div className='hidden md:flex flex-row justify-right w-1/4'>
-            <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
-            <button className='header-button mx-[0.5vw] bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
+        <div className='hidden md:flex flex-row justify-between w-1/4'>
+            {user ? ( <>
+                <div className='rounded-full'><Link to='/profile-page'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></Link></div>
+                <button onClick={handleLogout} className='header-button mx-[0.5vw] bg-[red] text-[#fff] border-[red]'><Link to='/auth'>Logout</Link></button>
+            </>) : <>
+                <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
+                <button className='header-button mx-[0.5vw] bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
+            </>}
         </div>
         <div onClick={showMenu} className='md:hidden relative cursor-pointer'>
             <img src={Menu} alt="Menu" />

@@ -1,5 +1,8 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+
+import { login } from "../redux/slices/authSlice";
 import Or from './Auth/Or'
 import Socmed from './Auth/Socmed'
 
@@ -13,10 +16,19 @@ const [passMsg, setPassMsg] = useState("Fill password")
 const [emailIsVisible, setEmailIsVisible] = useState(false)
 const [passIsVisible, setPassIsVisible] = useState(false)
 const [showPass, setShowPass] = useState(false)
+
+const user = useSelector((state) => state.auth.user)
+const authError = useSelector((state) => state.auth.error)
 const navigate = useNavigate()
+const dispatch = useDispatch()
 
 const loginValid = (e) => {
   e.preventDefault()
+
+  setEmailMsg("")
+  setPassMsg("");
+  setEmailIsVisible(false)
+  setPassIsVisible(false)
 
   if (!email) {
     setEmailIsVisible(true)
@@ -49,34 +61,21 @@ const loginValid = (e) => {
     setPassIsVisible(true)
     setPassMsg("Password should contain letters and numbers")
     return
-  }
-
-  if (email === "test@admin.com" && pass === "1234test") {
-    navigate("/admin")
-    return
-  }
-
-  const registeredUser = JSON.parse(localStorage.getItem("user"))
-  if (email === registeredUser.email && pass === registeredUser.pass) {
-    navigate("/")
-    return
-  } else if (email === registeredUser.email) {
-    setEmailIsVisible(true)
-    setPassIsVisible(true)  
-    setEmailMsg("Incorrect email and password")
-    setPassMsg("Incorrect email and password")
-    return
   } else {
-    setEmailIsVisible(true)
-    setEmailMsg("User not registered. Please sign up")
-    return
+    setPassIsVisible(false)
   }
 
-  
+  dispatch(login({email, pass}))
 }
 
-const showPassword = (e) => {
-  e.preventDefault()
+useEffect (() => {
+  if (user) {
+    navigate(user.role === "admin" ? "/admin" : "/")
+  } 
+}, [user, navigate])
+
+
+const showPassword = () => {
   setShowPass((showPass) => !showPass)
 }
 
@@ -89,14 +88,18 @@ const showPassword = (e) => {
         <form onSubmit={loginValid}  className='relative mt-[3vh] mb-[1vh] px-[3vw] pt-[3vh] pb-[1vh] font-normal text-[#4E4B66]'>
             <label for="email">Email</label> <br/>
             <input onChange={(e) => setEmail(e.target.value)} className='form-input border-[#DEDEDE]' type="email" name="email" value={email} placeholder="Enter your email"/> <br/>
-            <p className={`validation-msg ${emailIsVisible && emailMsg ? "visible" : "invisible"}`}>{emailMsg}</p>
+            <p className={`validation-msg ${emailIsVisible ? "visible" : "invisible"}`}>{emailMsg}</p>
             <label for="password">Password</label> <br/>
             <div className='flex rounded-sm pr-[1vw] mt-[2vh] border border-solid border-[#DEDEDE]'>
                 <input onChange={(e) => setPass(e.target.value)} className='form-input border-none outline-none m-[0]' type={showPass ? "text" : "password"} name="password" value={pass} placeholder="Enter your password"/> <br/><br/>
                 <img onClick={showPassword} className='cursor-pointer' src={Show} alt="Show Password"/>
             </div>
-            <p className={`validation-msg ${passIsVisible && passMsg ? "visible" : "invisible"}`}>{passMsg}</p>
-            <p className='text-right text-sm'><a href="">Forgot your password?</a></p>
+            <p className={`validation-msg ${passIsVisible ? "visible" : "invisible"}`}>{passMsg}</p>
+            {authError && <p className="validation-msg">{authError}</p>}
+            <p className='hidden md:flex flex-row justify-between text-sm'>
+              <Link to='/auth/register'>Do not have account? Register now</Link>
+              <a href="" className="text-right">Forgot your password?</a>
+            </p>
             <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal text-sm my-[3vh] py-[2vh] w-full' type="submit"> Login </button>
         </form> 
         <Or />
