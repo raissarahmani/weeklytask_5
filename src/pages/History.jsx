@@ -3,8 +3,10 @@ import Dropdown from '../assets/dropdown.png'
 import QR from '../assets/qr.png'
 
 function History() {
-const [showDetail, setShowDetail] = useState(false)
-
+const [isDetailVisible, setIsDetailVisible] = useState(false)
+const showDetails = () => {
+    setIsDetailVisible((prev) => !prev)
+}
 
   return (
     <div className='mx-[10vw] md:mx-0'>
@@ -23,10 +25,10 @@ const [showDetail, setShowDetail] = useState(false)
             </div>
             <div className='flex flex-row items-center justify-center my-[3vh]'>
                 <p className='md:text-lg text-[#AAAAAA] mr-[1vw]'> Show Details</p>
-                <img className='cursor-pointer' src={Dropdown} alt="" id="dropdown"/>
+                <img onClick={showDetails} className='cursor-pointer' src={Dropdown} alt="" id="dropdown"/>
             </div>
           </div>
-          <div className='my-[7vh]'>
+          <div className={`${isDetailVisible ? "block" : "hidden"} my-[7vh]`}>
               <p className='text-lg font-semibold'>Ticket Information</p>
               <div className='flex flex-col md:flex-row justify-between md:items-center my-[5vh]'>
                   <p className='text-[#8692A6] text-sm'>No. Rekening Virtual</p>
@@ -61,7 +63,7 @@ const [showDetail, setShowDetail] = useState(false)
                     <img className='cursor-pointer' src={Dropdown} alt=""/>
                 </div>
             </div>
-            <div className='my-[7vh]'>
+            <div className={`${isDetailVisible ? "block" : "hidden"} my-[7vh]`}>
                 <p className='text-lg font-semibold'>Ticket Information</p>
                 <div className='flex flex-col md:flex-row md:items-center justify-between w-3/4'>
                     <img className='w-1/2 md:w-1/3 h-1/3 object-cover px-[1vw]' src={QR} alt="QR Pembayaran"/>
@@ -120,7 +122,7 @@ const [showDetail, setShowDetail] = useState(false)
                     <img className='cursor-pointer' src={Dropdown} alt=""/>
                 </div>
             </div>
-            <div className='my-[7vh]'>
+            <div className={`${isDetailVisible ? "block" : "hidden"} my-[7vh]`}>
                 <p className='text-lg font-semibold'>Ticket Information</p>
                 <div className='flex flex-col md:flex-row md:items-center justify-between w-3/4'>
                     <img className='w-1/2 md:w-1/3 h-1/3 object-cover px-[1vw]' src={QR} alt="QR Pembayaran"/>
