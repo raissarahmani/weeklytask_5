@@ -1,10 +1,10 @@
-import React from 'react'
 import Steps from './Order/Steps'
 import Seats from './Order/Seats'
 
 function Order() {
+
   return (
-    <div className='bg-[#a0a3bd33] px-[10vw] py-[5vh]'>
+    <div className='bg-[#a0a3bd33] px-[10vw] py-[5vh] relative'>
       <Steps />
       <div className='flex flex-row'>
         <Seats />
@@ -12,5 +12,4 @@ function Order() {
     </div>
   )
 }
-
 export default Order
