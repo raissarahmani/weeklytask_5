@@ -22,6 +22,7 @@ import AdminPage from './AdminPage';
 import Admin from './pages/Admin';
 import AdminMovie from './pages/AdminMovie';
 import AdminAddMovie from './pages/AdminAddMovie'
+import { AdminRoute, AuthRedirect, PrivateRoute } from './components/PrivateRoute';
 
 function Router() {
   return (
@@ -31,15 +32,19 @@ function Router() {
             <Route path="now-playing" element = {<HomeRouter />}>
               <Route index element = {<Home2 />} />
               <Route path="movie/:id" element = {<Detail />} />
-              <Route path="order" element = {<Order />} />
-              <Route path="payment" element = {<Payment />} />
-              <Route path="success" element = {<Success />} />
+              <Route element={<PrivateRoute />}>
+                  <Route path="order" element = {<Order />} />
+                  <Route path="payment" element = {<Payment />} />
+                  <Route path="success" element = {<Success />} />
+              </Route>
             </Route>
         </Route>
 
-        <Route path="/auth" element = {<Auth />}>
-            <Route index element = {<Signin />} />
-            <Route path="register" element = {<Signup />} />
+        <Route element = {<AuthRedirect/>}>
+            <Route path="/auth" element = {<Auth />}>
+                <Route index element = {<Signin />} />
+                <Route path="register" element = {<Signup />} />
+            </Route>
         </Route>
 
         <Route path="/profile-page" element = {<ProfilePage />}> 
@@ -47,10 +52,12 @@ function Router() {
             <Route path="history" element = {<History />} />
         </Route>
 
-        <Route path="/admin" element = {<AdminPage />} >
-        <Route index element = {<Admin />} />
-            <Route path="movie-list" element = {<AdminMovie />} />
-            <Route path="add-movie" element = {<AdminAddMovie />} />
+        <Route element = {<AdminRoute />} >
+            <Route path="/admin" element = {<AdminPage />} >
+            <Route index element = {<Admin />} />
+                <Route path="movie-list" element = {<AdminMovie />} />
+                <Route path="add-movie" element = {<AdminAddMovie />} />
+            </Route>
         </Route>
     </Routes>
   )
