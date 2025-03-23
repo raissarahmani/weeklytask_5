@@ -13,6 +13,10 @@ export const AuthRedirect = () => {
 
 export const AdminRoute = () => {
   const user = useSelector((state) => state.auth.user)
-  return user?.email === 'test@admin.com' && user?.pass === '1234admin' ? <Navigate to="/admin" /> : <Navigate to="/" />
+  return user?.role === 'admin' ? <Outlet /> : <Navigate to="/" />
 }
 
+export const ClientRoute = () => {
+  const user = useSelector((state) => state.auth.user)
+  return user?.role !== 'admin' ? <Outlet /> : <Navigate to="/admin" />
+}

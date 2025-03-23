@@ -22,21 +22,23 @@ import AdminPage from './AdminPage';
 import Admin from './pages/Admin';
 import AdminMovie from './pages/AdminMovie';
 import AdminAddMovie from './pages/AdminAddMovie'
-import { AdminRoute, AuthRedirect, PrivateRoute } from './components/PrivateRoute';
+import { AdminRoute, AuthRedirect, ClientRoute, PrivateRoute } from './components/PrivateRoute';
 
 function Router() {
   return (
     <Routes>
-        <Route path="/" element = {<Dashboard />}>
-            <Route index element = {<Home />} />
-            <Route path="now-playing" element = {<HomeRouter />}>
-              <Route index element = {<Home2 />} />
-              <Route path="movie/:id" element = {<Detail />} />
-              <Route element={<PrivateRoute />}>
-                  <Route path="order" element = {<Order />} />
-                  <Route path="payment" element = {<Payment />} />
-                  <Route path="success" element = {<Success />} />
-              </Route>
+        <Route element = {<ClientRoute />}>
+            <Route path="/" element = {<Dashboard />}>
+                <Route index element = {<Home />} />
+                <Route path="now-playing" element = {<HomeRouter />}>
+                  <Route index element = {<Home2 />} />
+                  <Route path="movie/:id" element = {<Detail />} />
+                  <Route element={<PrivateRoute />}>
+                      <Route path="order" element = {<Order />} />
+                      <Route path="payment" element = {<Payment />} />
+                      <Route path="success" element = {<Success />} />
+                  </Route>
+                </Route>
             </Route>
         </Route>
 
@@ -47,9 +49,13 @@ function Router() {
             </Route>
         </Route>
 
-        <Route path="/profile-page" element = {<ProfilePage />}> 
-            <Route index element = {<Profile />} />
-            <Route path="history" element = {<History />} />
+        <Route element = {<ClientRoute />}>
+            <Route element = {<PrivateRoute />} >
+                <Route path="/profile-page" element = {<ProfilePage />}> 
+                    <Route index element = {<Profile />} />
+                    <Route path="history" element = {<History />} />
+                </Route>
+            </Route>
         </Route>
 
         <Route element = {<AdminRoute />} >
