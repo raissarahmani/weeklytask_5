@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import useLocalStorage from '../../hook/useLocalStorage';
 
 import Googlepay from '../../assets/google-pay.png'
 import Visa from "../../assets/visa.png";
@@ -11,174 +12,176 @@ import Bri from '../../assets/bri.png'
 import Ovo from '../../assets/ovo.png'
 
 function PaymentPage() {
-    const [name, setName] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [payMethod, setPayMethod] = useState("")
-    const [isNameVisible, setIsNameVisible] = useState(false)
-    const [nameMsg, setNameMsg] = useState("Fill name")
-    const [isEmailVisible, setIsEmailVisible] = useState(false)
-    const [emailMsg, setEmailMsg] = useState("Fill email")
-    const [isPhoneVisible, setIsPhoneVisible] = useState(false)
-    const [phoneMsg, setPhoneMsg] = useState("Fill phone number")
-    const [isRadioVisible, setIsRadioVisible] = useState(false)
-    const [radioMsg, setRadioMsg] = useState("Choose payment")
-    const [isPopupVisible, setIsPopupVisible] = useState(false)
+    const [movieDetails] = useLocalStorage("movieDetails", {})
+    const [bookingDetails] = useLocalStorage("bookingDetails", {})
+    
+    const [formPayment, setFormPayment] = useLocalStorage("paymentDetails", {
+        name: "",
+        email: "",
+        phone: "",
+        payment: "",
+    })
+    const [error, setError] = useState({})
+    const [isFormValid, setIsFormValid] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const navigate = useNavigate()
 
-    const payOrder = (e) => {
-        e.preventDefault()
-
-        if (!name) {
-            setIsNameVisible(true)
-            setNameMsg("Data should be filled")
-        } else {
-          setIsNameVisible(false)
-        }
-
-        let fullname = name.toLowerCase() !== name.toUpperCase()
-        if (!fullname) {
-            setIsNameVisible(true)
-            setNameMsg("Name should only contain alphabet")
-        }
-
-        if (!email) {
-            setIsEmailVisible(true)
-            setEmailMsg("Data should be filled")
-        } else if (!email.includes('@')) {
-          setIsEmailVisible(true)
-          setEmailMsg ("Email not valid")
-        } else {
-          setIsEmailVisible(false)
-        }
-
-        if (!phone) {
-          setIsPhoneVisible(true)
-          setPhoneMsg("Data should be filled")
-        } else if (phone.length < 8) {
-          setIsPhoneVisible(true)
-          setPhoneMsg ("Phone not valid")
-        } else {
-          setIsPhoneVisible(false)
-        }
-
-        
+    const formHandler = (e) => {
+        setFormPayment({...formPayment,[e.target.name] : e.target.value})
     }
-    const nextPage = (e) => {
-    e.preventDefault()
-    navigate("/now-playing/success")
-}
+
+    useEffect(() => {
+        let newError = {}
+
+        if(!formPayment.name) newError.name = "Data should be filled"
+        
+        if(!formPayment.email) {
+            newError.email = "Data should be filled"
+        } else if (!formPayment.email.includes('@')) {
+            newError.email = "Email not valid"
+        }
+
+        if(!formPayment.phone) {
+            newError.phone = "Data should be filled"
+        } else if (formPayment.phone.length < 8) {
+            newError.phone = "Phone number not valid"
+        }
+        if(!formPayment.payment) newError.payment = "Data should be filled"
+
+        setError(newError)
+        setIsFormValid(Object.keys(newError).length === 0)
+    }, [formPayment])
+
+    const submitForm = (e) => {
+        e.preventDefault()
+        setIsSubmitted(true)
+        if (isFormValid) {
+            localStorage.setItem("paymentDetails", JSON.stringify(formPayment))
+            setIsModalOpen(true)
+        }
+    }
+
+    const nextPage = () => {
+        navigate("/now-playing/success")
+    }
 
   return (
     <>
-    <section className='bg-[#fff] mx-[7vw] py-[10vh] px-[4vw] rounded-md text-left'>
+    <section className='bg-[#fff] mx-[3vw] md:mx-[7vw] py-[10vh] px-[4vw] rounded-md text-left'>
         <div>
-            <p className='font-semibold text-2xl text-[#14142B]'>Payment Info</p>
+            <p className='font-semibold text-xl md:text-2xl text-[#14142B]'>Payment Info</p>
             <form className='my-[5vh] text-sm text-[#8692A6]'>
                 <label for="date">DATE & TIME</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="date" value="Tuesday, 07 July 2020 at 02:00pm" readonly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="date" value={`${bookingDetails.date ? new Date(bookingDetails.date).toLocaleDateString("en-US", {weekday: "long", day: "numeric", month: "long", year: "numeric",}) : "No date selected"} at ${bookingDetails.time }`} readOnly/> <br/><br/>
                 <label for="title">MOVIE TITLE</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="title" value="Spider-Man:Homecoming" readonly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="title" value={movieDetails.title} readOnly/> <br/><br/>
                 <label for="cinema">CINEMA NAME</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="cinema" value="CineOne21 Cinema" readonly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="cinema" value={bookingDetails.cinema} readOnly/> <br/><br/>
                 <label for="qty">NUMBER OF TICKETS</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="qty" value="3 pieces" readonly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="qty" value="3 pieces" readOnly/> <br/><br/>
                 <label for="total">TOTAL PAYMENT</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6] text-[#1D4ED8] font-bold' type="text" name="total" value="$30.00" readonly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6] text-[#1D4ED8] font-bold' type="text" name="total" value="$30.00" readOnly/> <br/><br/>
             </form>
         </div>
         <div>
-            <p className='font-semibold text-2xl text-[#14142B]'>Personal Information</p>
-            <form className='my-[5vh] text-sm text-[#8692A6]'>
+            <p className='font-semibold text-xl md:text-2xl text-[#14142B]'>Personal Information</p>
+            <form onSubmit={submitForm} className='my-[5vh] text-sm text-[#8692A6]'>
                 <label for="name">Full Name</label> <br/>
-                <input onChange={(e) => setName(e.target.value)} className='form-input border-[#E6E6E6]' type="text" name="name" value={name} placeholder="Jonas El Rodriguez"/> <br/>
-                <p className={`validation-msg ${isNameVisible && nameMsg ? 'visible' : 'invisible'}`}>Data should be filled</p>
+                <input onChange={formHandler} className='form-input border-[#E6E6E6]' type="text" name="name" value={formPayment.name} placeholder="Jonas El Rodriguez"/> <br/>
+                {isSubmitted && error.name && <p className='validation-msg'>{error.name}</p>}
                 <label for="email">Email</label> <br/>
-                <input onChange={(e) => setEmail(e.target.value)} className='form-input border-[#E6E6E6]' type="email" name="email" value={email} placeholder="jonasrodri123@gmail.com"/> <br/>
-                <p className={`validation-msg ${isEmailVisible && emailMsg ? 'visible' : 'invisible'}`}>Data should be filled</p>
+                <input onChange={formHandler} className='form-input border-[#E6E6E6]' type="email" name="email" value={formPayment.email} placeholder="jonasrodri123@gmail.com"/> <br/>
+                {isSubmitted && error.email && <p className='validation-msg'>{error.email}</p>}
                 <label for="phone">Phone Number</label> <br/>
                 <div className='form-input border-[#E6E6E6] flex flex-row justify-between'>
                     <p>+62</p>
-                    <input onChange={(e) => setPhone(e.target.value)} className='outline-none border-none ml-[1vw] w-full' type="text" name="phone" value={phone}/> <br/>
+                    <input onChange={formHandler} className='outline-none border-none ml-[1vw] w-full' type="text" name="phone" value={formPayment.phone}/> <br/>
                 </div>
-                <p className={`validation-msg ${isPhoneVisible && phoneMsg ? 'visible' : 'invisible'}`}>Data should be filled</p>
+                {isSubmitted && error.phone && <p className='validation-msg'>{error.phone}</p>}
             </form>
         </div>
         <div>
-            <p className='font-semibold text-2xl text-[#14142B]'>Payment Method</p>
-            <form className='grid grid-cols-4 grid-rows-2 mt-[5vh] gap-[1vw]'>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="gpay" value="gpay"/>
-                    <label className='label-radio' for="gpay">
-                        <img src={Googlepay} alt="Google Pay"/>
-                    </label>
+            <p className='font-semibold text-xl md:text-2xl text-[#14142B]'>Payment Method</p>
+            <form onSubmit={submitForm}>
+                <div className='grid grid-cols-2 md:grid-cols-4 grid-rows-4 md:grid-rows-2 mt-[5vh] gap-[1vw]'>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="gpay" value="gpay" checked={formPayment.payment === "gpay"} />
+                        <label className='label-radio' for="gpay">
+                            <img src={Googlepay} alt="Google Pay"/>
+                        </label>
+                    </div>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="visa" value="visa" checked={formPayment.payment === "visa"} />
+                        <label className='label-radio' for="visa">
+                            <img src={Visa} alt="Visa"/>
+                        </label>
+                    </div>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="gopay" value="gopay" checked={formPayment.payment === "gopay"} />
+                        <label className='label-radio' for="gopay">
+                            <img src={Gopay} alt="Gopay"/>
+                        </label>
+                    </div>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="paypal" value="paypal" checked={formPayment.payment === "paypal"} />
+                        <label className='label-radio' for="paypal">
+                            <img src={Paypal} alt="Paypal"/>
+                        </label>
+                    </div>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="dana" value="dana" checked={formPayment.payment === "dana"} />
+                        <label className='label-radio' for="dana">
+                            <img src={Dana} alt="Dana"/>
+                        </label>
+                    </div>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="bca" value="bca" checked={formPayment.payment === "bca"} />
+                        <label className='label-radio' for="bca">
+                            <img src={Bca} alt="BCA"/>
+                        </label>
+                    </div>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="bri" value="bri" checked={formPayment.payment === "bri"} />
+                        <label className='label-radio' for="bri">
+                            <img src={Bri} alt="BRI"/>
+                        </label>
+                    </div>
+                    <div className='cinema-radio'>
+                        <input onChange={formHandler} className='hidden peer' type="radio" name="payment" id="ovo" value="ovo" checked={formPayment.payment === "ovo"} />
+                        <label className='label-radio' for="ovo">
+                            <img src={Ovo} alt="Ovo"/>
+                        </label>
+                    </div>
                 </div>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="visa" value="visa"/>
-                    <label className='label-radio' for="visa">
-                        <img src={Visa} alt="Visa"/>
-                    </label>
-                </div>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="gopay" value="gopay"/>
-                    <label className='label-radio' for="gopay">
-                        <img src={Gopay} alt="Gopay"/>
-                    </label>
-                </div>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="paypal" value="paypal"/>
-                    <label className='label-radio' for="paypal">
-                        <img src={Paypal} alt="Paypal"/>
-                    </label>
-                </div>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="dana" value="dana"/>
-                    <label className='label-radio' for="dana">
-                        <img src={Dana} alt="Dana"/>
-                    </label>
-                </div>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="bca" value="bca"/>
-                    <label className='label-radio' for="bca">
-                        <img src={Bca} alt="BCA"/>
-                    </label>
-                </div>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="bri" value="bri"/>
-                    <label className='label-radio' for="bri">
-                        <img src={Bri} alt="BRI"/>
-                    </label>
-                </div>
-                <div className='cinema-radio'>
-                    <input className='hidden' type="radio" name="pay" id="ovo" value="ovo"/>
-                    <label className='label-radio' for="ovo">
-                        <img src={Ovo} alt="Ovo"/>
-                    </label>
-                </div>
+                {isSubmitted && error.payment && <p className='validation-msg'>{error.payment}</p>}
+                <button className='custom-button bg-[#1D4ED8] text-sm text-[#fff] w-full py-[2vh] my-[5vh]'>Pay your order</button>
             </form>
-            <p className='validation-msg'>Choose payment method</p>
-            <button onClick={payOrder} className='custom-button bg-[#1D4ED8] text-sm text-[#fff] w-full py-[2vh]'>Pay your order</button>
         </div>
     </section>
-    <section>
-        <p className='text-center font-bold text-2xl'>Payment Info</p>
-        <div className='flex flex-row items-center justify-between my-[7vh]'>
-            <p className='text-[#8692A6] text-sm'>No. Rekening Virtual :</p>
-            <div className='flex flex-row items-center text-right font-semibold text-lg'>
-                <p>12321328913829724</p>
-                <button className='custom-button text-[#1D4ED8] text-sm font-normal px-[1vw] py-[2vh] ml-[1vw]'>Copy</button>
+    {isModalOpen && (
+    <div className='absolute inset-0 bg-[#00000099] flex justify-center items-center z-3'>
+        <section className='bg-[#fff] rounded-md absolute top-1/2 left-1/2 py-[5vh] px-[10vw] md:px-[3vw] transform -translate-x-1/2 -translate-y-1/2 z-4'>
+            <p className='text-center font-bold text-2xl'>Payment Info</p>
+            <div className='flex flex-col md:flex-row items-start md:items-center justify-between my-[7vh]'>
+                <p className='text-[#8692A6] text-sm'>No. Rekening Virtual :</p>
+                <div className='flex flex-row items-center text-right font-semibold text-sm md:text-lg mt-[2vh] md:mt-0'>
+                    <p>12321328913829724</p>
+                    <button className='custom-button text-[#1D4ED8] text-sm font-normal px-[1vw] py-[1vh] md:py-[2vh] ml-[1vw]'>Copy</button>
+                </div>
             </div>
-        </div>
-        <div className='flex flex-row items-center justify-between my-[7vh]'>
-            <p className='text-[#8692A6] text-sm'>Total Payment :</p>
-            <p className='font-bold text-lg text-[#1D4ED8] text-right'>$30</p>
-        </div>
-        <p className='text-[#A0A3BD]'>Pay this payment bill before it is due, <span className='text-[D00707]'>on June 23, 2023.</span> If the bill has not been paid by the specified time, it will be forfeited</p>
-        <div className='flex flex-col items-center justify-between my-[7vh] gap-[1vh]'>
-            <button onClick={nextPage} className='custom-button bg-[#1D4ED8] text-[#fff] w-full py-[2vh] font-semibold text-sm'>Check Payment</button>
-            <button className='custom-button text-[#1D4ED8] bg-[#fff] w-full py-[2vh] font-semibold text-sm'>Pay Later</button>
-        </div>
-    </section>
+            <div className='flex flex-col md:flex-row items-start md:items-center justify-between my-[7vh]'>
+                <p className='text-[#8692A6] text-sm'>Total Payment :</p>
+                <p className='font-bold text-lg text-[#1D4ED8] text-right'>$30</p>
+            </div>
+            <p className='text-sm md:text-basis text-[#A0A3BD]'>Pay this payment bill before it is due, <span className='text-[D00707]'>on June 23, 2023.</span> If the bill has not been paid by the specified time, it will be forfeited</p>
+            <div className='flex flex-col items-center justify-between my-[7vh] gap-[1vh]'>
+                <button onClick={nextPage} className='custom-button bg-[#1D4ED8] text-[#fff] w-full py-[2vh] font-semibold text-sm'>Check Payment</button>
+                <button onClick={() => setIsModalOpen(false)} className='custom-button text-[#1D4ED8] bg-[#fff] w-full py-[2vh] font-semibold text-sm'>Pay Later</button>
+            </div>
+        </section>
+    </div>
+    )}
     </>
   )
 }
