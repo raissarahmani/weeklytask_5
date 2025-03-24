@@ -23,8 +23,6 @@ function Book() {
     }
 
     useEffect(() => {
-        setFormData({ date: "", time: "", location: "", cinema: "" })
-
         let newError = {}
         if(!formData.date) newError.date = "Data should be filled"
         if(!formData.time) newError.time = "Data should be filled"
@@ -33,7 +31,7 @@ function Book() {
 
         setError(newError)
         setIsFormValid(Object.keys(newError).length === 0)
-    }, [])
+    }, [formData])
 
     const submitForm = (e) => {
         e.preventDefault()
