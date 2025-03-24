@@ -79,7 +79,7 @@
     }
     .cinema-radio {
         border-color: var(--color-tertiary);
-        @apply border-2 border-solid items-center justify-center w-full cursor-pointer
+        @apply border-2 border-solid items-center justify-center w-full h-full cursor-pointer
     }
     .label-radio {
         @apply flex justify-center items-center w-full h-full cursor-pointer py-[5vh] px-[3vw] hover:bg-[#1D4ED8] peer-checked:bg-[#1D4ED8]
@@ -92,7 +92,7 @@
         @apply grid grid-cols-1 md:grid-cols-3 grid-rows-7 md:grid-rows-3 items-center h-[80vh] md:h-[30vh] rounded-xs pt-[2vh] px-[2vw] border border-solid;
     }
     .seats {
-        @apply w-[17px] md:w-[20px] h-[17px] md:h-[20px] rounded-sm my-[1vh] mx-[0.25vw] font-normal text-sm text-[#4E4B66] text-center bg-[#D6D8E7] cursor-pointer;
+        @apply w-[17px] md:w-[20px] h-[17px] md:h-[20px] rounded-sm my-[1vh] mx-[0.25vw] font-normal text-sm text-[#4E4B66] text-center bg-[#D6D8E7] hover:bg-[#1D4ED8] cursor-pointer;
     }
     .form-input {
         @apply font-normal text-[#000] border border-solid w-full my-[1vh] py-[2vh] px-[1vw]
@@ -112,20 +112,10 @@
         box-shadow: inset 0 -2px 5px rgba(0,0,0,0.2)
     }
     .history {
-        @apply grid my-[7vh] py-[7vh] px-[3vw] rounded-3xl bg-[#fff];
-        grid-template-areas: 
-        'a a'
-        'b c'
-        'g g';
+        @apply my-[7vh] py-[7vh] px-[5vw] md:px-[3vw] rounded-2xl bg-[#fff];
     }
     .history-child {
-        @apply grid col-span-2 border-b border-solid border-[#DEDEDE];
-        grid-template-areas: 
-        'd f'
-        'e f';
-    }
-    .receipt {
-        @apply grid grid-cols-[15vw_10vw_7vw_10vw_7vw] items-center w-7/10;
+        @apply flex flex-col md:flex-row justify-between mb-[5vh] md:mb-[3vh] border-b border-solid border-[#DEDEDE];
     }
     .validation-msg {
         @apply visible font-extralight text-xs text-[red] mb-[2vh]
