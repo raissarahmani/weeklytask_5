@@ -16,7 +16,7 @@ const showDetails = () => {
                 <p className='text-sm md:text-basis text-[#AAAAAA]'>Tuesday, 07 July 2020 - 04:30pm</p>
                 <p className='text-xl md:text-2xl font-semibold mb-[7vh]'>Spider-Man: Homecoming</p>
             </div>
-            <img className='my-[2vh] w-1/2 md:w-1/4 h-1/2 -order-1 md:order-0' src="../../public/cineone21.svg" alt="cineone21"/>
+            <img className='my-[2vh] w-1/2 md:w-1/4 h-1/2 -order-1 md:order-0' src="/cineone21.svg" alt="cineone21"/>
           </div>
           <div className='flex flex-col md:flex-row justify-between'>
             <div className='flex flex-col md:flex-row gap-2'>
@@ -51,7 +51,7 @@ const showDetails = () => {
                     <p className='text-sm md:text-basis text-[#AAAAAA]'>Monday, 14 June 2020 - 02:00pm</p>
                     <p className='text-xl md:text-2xl font-semibold mb-[7vh]'>Avengers: End Game</p>
                 </div>
-                <img className='my-[2vh] w-1/4 h-1/2 -order-1 md:order-0' src="../../public/ebv.svg" alt="ebv"/>
+                <img className='my-[2vh] w-1/4 h-1/2 -order-1 md:order-0' src="/ebv.svg" alt="ebv"/>
             </div>
             <div className='flex flex-col md:flex-row justify-between'>
                 <div className='flex flex-col md:flex-row items-center justify-center gap-2'>
@@ -110,7 +110,7 @@ const showDetails = () => {
                     <p className='text-sm md:text-basis text-[#AAAAAA]'>Monday, 14 June 2020 - 02:00pm</p>
                     <p className='text-xl md:text-2xl font-semibold mb-[7vh]'>Avengers: End Game</p>
                 </div>
-                <img className='my-[2vh] w-1/4 h-1/2 -order-1 md:order-0' src="../../public/ebv.svg" alt="ebv"/>
+                <img className='my-[2vh] w-1/4 h-1/2 -order-1 md:order-0' src="/ebv.svg" alt="ebv"/>
             </div>
             <div className='flex flex-col md:flex-row justify-between'>
                 <div className='flex flex-col md:flex-row items-center justify-center gap-2'>

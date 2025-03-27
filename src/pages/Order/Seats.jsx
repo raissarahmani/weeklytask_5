@@ -235,7 +235,7 @@ function Seats() {
         <div className='hidden md:block w-1/4 pl-[2vw]'>
           <section className='rounded-md bg-[#fff]'>
               <div className='py-[5vh] px-[5vw]'>
-                  <img src={`../../../public/${bookingDetails.cinema || "ebv"}.svg`} alt={bookingDetails.cinema || "Cinema"} />
+                  <img src={`/${bookingDetails.cinema || "ebv"}.svg`} alt={bookingDetails.cinema || "Cinema"} />
               </div>
               <div className='py-[2vh] px-[2vw]'>
                   <div className='flex flex-row justify-between mb-[3vh]'>

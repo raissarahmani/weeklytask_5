@@ -11,18 +11,18 @@ function Hero() {
         <div className='flex flex-row justify-center md:w-2/5 px-[1vw] my-[5vh] md:my-[0]'>
             <div className='px-[0.5vw]'>
                 <div className='w-[35vw] md:w-[15vw] h-[25vh] md:h-[30vh]'>
-                    <img className='object-cover object-center-top w-full h-full rounded-t-3xl py-[1vh]' src="../../public/poster6.png" alt="Movie Poster" />
+                    <img className='object-cover object-center-top w-full h-full rounded-t-3xl py-[1vh]' src="/poster6.png" alt="Movie Poster" />
                 </div>
                 <div className='w-[35vw] md:w-[15vw] h-[45vh] md:h-[40vh]'>
-                    <img className='object-cover object-center-top w-full h-full rounded-b-3xl py-[1vh]' src="../../public/poster1.png" alt="Movie Poster" />
+                    <img className='object-cover object-center-top w-full h-full rounded-b-3xl py-[1vh]' src="/poster1.png" alt="Movie Poster" />
                 </div>
             </div>
             <div className='px-[0.5vw]'>
                 <div className='w-[35vw] md:w-[15vw] h-[45vh] md:h-[40vh]'>
-                    <img className='object-cover object-center-top w-full h-full rounded-t-3xl py-[1vh]' src="../../public/poster5.png" alt="Movie Poster" />
+                    <img className='object-cover object-center-top w-full h-full rounded-t-3xl py-[1vh]' src="/poster5.png" alt="Movie Poster" />
                 </div>
                 <div className='w-[35vw] md:w-[15vw] h-[25vh] md:h-[30vh]'>
-                    <img className='object-cover object-center-top w-full h-full rounded-b-3xl py-[1vh]' src="../../public/poster7.png" alt="Movie Poster" />
+                    <img className='object-cover object-center-top w-full h-full rounded-b-3xl py-[1vh]' src="/poster7.png" alt="Movie Poster" />
                 </div>
             </div>
         </div>

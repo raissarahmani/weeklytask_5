@@ -16,7 +16,7 @@ function HeaderProfile() {
   return (
     <header className='flex flex-row justify-between items-center bg-[#fff] py-[5vh] px-[10vw] sticky top-0 z-[10]'>
         <div className='w-1/2 md:w-3/20'>
-            <img className='w-1/2 md:w-7/10' src="../../public/tickitz2.png" alt="Logo Tickitz" />
+            <img className='w-1/2 md:w-7/10' src="/tickitz2.png" alt="Logo Tickitz" />
         </div>
         <nav className='hidden md:flex flex-row justify-evenly w-3/5'>
             <p className='hover:text-[#1D4ED8]'><Link to='/'>Home</Link></p>

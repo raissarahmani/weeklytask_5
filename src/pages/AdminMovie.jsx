@@ -35,7 +35,7 @@ function AdminMovie() {
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
                     <td className='text-[#1F4173] text-sm'>1</td>
-                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="../../public/poster1.png" alt="Spiderman"/></div></td>
+                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="/poster1.png" alt="Spiderman"/></div></td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Spiderman Homecoming</td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Action, Adventure</td>
                     <td className='text-[#1F4173] text-sm'>07/05/2023</td>
@@ -48,7 +48,7 @@ function AdminMovie() {
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
                     <td className='text-[#1F4173] text-sm'>2</td>
-                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="../../public/poster4.png" alt="Avengers"/></div></td>
+                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="/poster4.png" alt="Avengers"/></div></td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Avengers End Game</td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Sci-fi, Adventure</td>
                     <td className='text-[#1F4173] text-sm'>10/06/2023</td>
@@ -61,7 +61,7 @@ function AdminMovie() {
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
                     <td className='text-[#1F4173] text-sm'>3</td>
-                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="../../public/poster1.png" alt="Spiderman"/></div></td>
+                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="/poster1.png" alt="Spiderman"/></div></td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Spiderman Homecoming</td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Action, Adventure</td>
                     <td className='text-[#1F4173] text-sm'>07/05/2023</td>
@@ -74,7 +74,7 @@ function AdminMovie() {
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
                     <td className='text-[#1F4173] text-sm'>4</td>
-                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="../../public/poster4.png" alt="Avengers"/></div></td>
+                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="/poster4.png" alt="Avengers"/></div></td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Avengers End Game</td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Sci-fi, Adventure</td>
                     <td className='text-[#1F4173] text-sm'>10/06/2023</td>
@@ -87,7 +87,7 @@ function AdminMovie() {
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
                     <td className='text-[#1F4173] text-sm'>5</td>
-                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="../../public/poster1.png" alt="Spiderman"/></div></td>
+                    <td className='text-[#1F4173] text-sm flex justify-center items-center'><div className='h-[10vh] w-[10vh] my-[1vh] overflow-hidden'><img className='object-cover object-center-top rounded-lg w-full h-full' src="/poster1.png" alt="Spiderman"/></div></td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Spiderman Homecoming</td>
                     <td className='text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[200px]'>Action, Adventure</td>
                     <td className='text-[#1F4173] text-sm'>07/05/2023</td>
