@@ -29,14 +29,16 @@ function showMenu() {
             <p className='hover:text-[#1D4ED8]'><Link to='now-playing'>Movie</Link></p>
             <p className='hover:text-[#1D4ED8]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
         </nav>
-        <div className='hidden md:flex flex-row justify-between w-1/4'>
-            {user ? ( <>
+        <div className='hidden md:block w-1/4'>
+            {user ? ( 
+            <div className='flex flex-row justify-between'>
                 <div className='rounded-full'><Link to='/profile-page'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></Link></div>
                 <button onClick={handleLogout} className='header-button mx-[0.5vw] bg-[red] text-[#fff] border-[red]'><Link to='/auth'>Sign Out</Link></button>
-            </>) : <>
-                <button className='header-button mx-[0.5vw] bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
-                <button className='header-button mx-[0.5vw] bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
-            </>}
+            </div>) : 
+            <div className='flex flex-row justify-evenly'>
+                <button className='header-button bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
+                <button className='header-button bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
+            </div>}
         </div>
         <div onClick={showMenu} className='md:hidden relative cursor-pointer'>
             <img src={Menu} alt="Menu" />
