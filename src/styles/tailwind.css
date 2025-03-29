@@ -69,7 +69,7 @@
     }
     .pages {
         border-color: var(--color-tertiary);
-        @apply border border-solid rounded-full text-lg text-[#4E4B66] mx-[0.5vw] text-center w-[5vh] h-[5vh] cursor-pointer relative
+        @apply border border-solid rounded-lg text-lg text-[#4E4B66] mx-[0.5vw] text-center w-[5vh] h-[5vh] cursor-pointer relative
     }
     .summary {
         @apply grid grid-cols-1 grid-rows-[90vh_10vh] md:grid-rows-[60vh_30vh] items-center absolute top-1/20 md:top-17/100 left-0 md:left-1/10;
