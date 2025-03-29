@@ -5,9 +5,29 @@ import Down from '../../assets/Arrow-black.png'
 import Right from '../../assets/right-black.png'
 
 function Seats() {
+    const [formData, setFormData] = useLocalStorage("bookingDetails", {
+        date: "",
+        time: "",
+        location: "",
+        cinema: "",
+        seats: [],
+    })    
     const [movieDetails] = useLocalStorage("movieDetails", {})
     const [bookingDetails] = useLocalStorage("bookingDetails", {})
     const navigate = useNavigate()
+
+    const seatHandler = (seatId) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            seats: (prevData.seats || []).includes(seatId) 
+            ? (prevData.seats || []).filter((seat) => seat !== seatId)
+            : [...(prevData.seats || []), seatId],
+        }))
+    }
+
+    const rows = ["A", "B", "C", "D", "E", "F", "G"]
+    const colsLeft = [1,2,3,4,5,6,7]
+    const colsRight = [8,9,10,11,12,13,14]
 
     const changeMovie = () => {
         navigate("/now-playing")
@@ -22,7 +42,7 @@ function Seats() {
         <section className='w-full md:w-3/4 rounded-md bg-[#fff] py-[5vh] px-[2vw]'>
             <div className='ticket'>
                 <div className='col-span-1 row-span-3 flex justify-center items-center h-full md:overflow-hidden md:pr-[2vw] pb-[2vh]'>
-                    <img className='object-cover object-top w-full h-full' src={movieDetails.poster || "../../../public/avenger.png"} alt={movieDetails.title || "Movie Poster"} />
+                    <img className='object-cover object-top w-full h-full' src={movieDetails.poster || "/avenger.png"} alt={movieDetails.title || "Movie Poster"} />
                 </div>
                 <p className='md:col-span-2 row-span-1 font-semibold text-2xl text-center md:text-left text-[#000]'>{movieDetails.title || ""}</p>
                 <div className='md:col-span-2 row-span-1 flex flex-row items-center justify-center md:justify-start'>
@@ -39,164 +59,57 @@ function Seats() {
                 <p className='font-medium text-lg md:text-2xl text-[#14142B] my-[5vh] mx-[2vw]'>Choose Your Seat</p>
                 <div className='px-[1vw]'>
                     <p className='hidden md:block font-semibold text-[#4E4B66] text-center w-4/5'>Screen</p>
-                    <div className='flex flex-row justify-between'>
-                        <div className='grid grid-cols-8 grid-rows-1 mt-[5vh] border-l border-b border-[red] md:border-none'>
-                            <div className='invisible md:visible'>
-                                <div className='seats bg-transparent'>A</div>
-                                <div className='seats bg-transparent'>B</div>
-                                <div className='seats bg-transparent'>C</div>
-                                <div className='seats bg-transparent'>D</div>
-                                <div className='seats bg-transparent'>E</div>
-                                <div className='seats bg-transparent'>F</div>
-                                <div className='seats bg-transparent'>G</div>
-                                <div className='hidden md:block seats bg-transparent'></div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>1</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>2</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>3</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>4</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>5</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>6</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>7</div>
-                            </div>
+                    <div className='flex flex-row'>
+                        <div className='hidden md:block flex flex-col mt-[4vh]'>
+                            {rows.map((row) => (
+                                <div key={row} className='seats bg-transparent my-[2vh]'>{row}</div>
+                            ))}
                         </div>
-                        <div className='grid grid-cols-7 md:grid-cols-10 grid-rows-1 mt-[5vh] md:pr-[10vw] border-b border-[red] md:border-none'>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>8</div>
+                        <div className='flex flex-row justify-between w-full md:w-2/3'>
+                            <div className={`grid grid-cols-${colsLeft.length} mt-[5vh] border-b border-[red] md:border-none`}>
+                                {rows.map((row) => (
+                                    colsLeft.map((col) => {
+                                        const seatId = `${row}${col}`;
+                                        const isSelected = (formData.seats || []).includes(seatId);
+                                    
+                                        return (
+                                            <div 
+                                                onClick={() => seatHandler(seatId)} 
+                                                key={seatId} 
+                                                className={`seats ${isSelected ? "bg-[#1D4ED8]" : "bg-[#D6D8E7]"}`}>
+                                            </div>
+                                        )
+                                    })
+                                ))}
+
+                                {colsLeft.map((col) => (
+                                    <div key={col} className='hidden md:block seats bg-transparent text-center'>{col}</div>
+                                ))}
                             </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>9</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>10</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>11</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>12</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>13</div>
-                            </div>
-                            <div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='seats'></div>
-                                <div className='hidden md:block seats bg-transparent'>14</div>
+                            <div className={`grid grid-cols-${colsRight.length} mt-[5vh] border-b border-[red] md:border-none`}>
+                                {rows.map((row) => (
+                                    colsRight.map((col) => {
+                                        const seatId = `${row}${col}`;
+                                        const isSelected = (formData.seats || []).includes(seatId);
+                                    
+                                        return (
+                                            <div 
+                                                onClick={() => seatHandler(seatId)} 
+                                                key={seatId} 
+                                                className={`seats ${isSelected ? "bg-[#1D4ED8]" : "bg-[#D6D8E7]"}`}>
+                                            </div>
+                                        );
+                                    })
+                                ))}
+
+                                {colsRight.map((col) => (
+                                    <div key={col} className='hidden md:block seats bg-transparent text-center'>{col}</div>
+                                ))}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className='md:text-lg mt-[5vh] mx-[2vw]'>
+                <div className='md:text-lg my-[5vh] mx-[2vw]'>
                     <p className='font-medium md:font-normal'>Seating key</p>
                     <div className='flex flex-row justify-evenly md:justify-center '>
                         <div className='flex flex-col md:flex-row mt-[5vh]'>
@@ -235,7 +148,7 @@ function Seats() {
         <div className='hidden md:block w-1/4 pl-[2vw]'>
           <section className='rounded-md bg-[#fff]'>
               <div className='py-[5vh] px-[5vw]'>
-                  <img src={`/${bookingDetails.cinema || "ebv"}.svg`} alt={bookingDetails.cinema || "Cinema"} />
+                  <img src={`/${bookingDetails.cinema || "logo"}.svg`} alt={bookingDetails.cinema || "Cinema"} />
               </div>
               <div className='py-[2vh] px-[2vw]'>
                   <div className='flex flex-row justify-between mb-[3vh]'>
@@ -261,12 +174,18 @@ function Seats() {
                   </div>
                   <div className='flex flex-row justify-between mb-[3vh]'>
                       <div className='text-xs text-[#6B6B6B]'>Seat choosed</div>
-                      <div className='font-semibold text-xs text-center text-[#14142B]'>C4, C5, C6</div>
+                      <div className='font-semibold text-xs text-right text-[#14142B]'>{(bookingDetails.seats || [])
+                      .sort((left,right) => {
+                        const [rowLeft, colLeft] = [left[0], parseInt(left.slice((1),10))]
+                        const [rowRight, colRight] = [right[0], parseInt(right.slice((1), 10))]
+                        return rowLeft > rowRight ? 1 : (rowLeft < rowRight ? -1 : (colLeft > colRight ? 1 : (colLeft < colRight ? -1 : 0)))
+                      })
+                      .join(", ") || "No seat selected"}</div>
                   </div>
               </div>
               <div className='flex flex-row justify-between items-center py-[2vh] px-[2vw] border-t border-solid border-[#E6E6E6]'>
                   <div>Total Payment</div>
-                  <div className='font-semibold text-[#1D4ED8] text-right'>$30</div>
+                  <div className='font-semibold text-[#1D4ED8] text-right'>${(bookingDetails.seats || []) ? (bookingDetails.seats || []).length * 10 : 0}</div>
               </div>
               <button onClick={nextPage} className='custom-button my-[6vh] mx-[2vw] py-[2vh] w-4/5 text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
           </section>
