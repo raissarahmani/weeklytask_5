@@ -187,7 +187,7 @@ function Seats() {
                   <div>Total Payment</div>
                   <div className='font-semibold text-[#1D4ED8] text-right'>${(bookingDetails.seats || []) ? (bookingDetails.seats || []).length * 10 : 0}</div>
               </div>
-              <button onClick={nextPage} className='custom-button my-[6vh] mx-[2vw] py-[2vh] w-4/5 text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
+              <button onClick={nextPage} className='custom-button my-[6vh] mx-[2vw] py-[2vh] w-4/5 text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button> 
           </section>
       </div>
     </>
