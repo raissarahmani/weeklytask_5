@@ -78,9 +78,9 @@ function PaymentPage() {
                 <label for="cinema">CINEMA NAME</label> <br/>
                 <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="cinema" value={bookingDetails.cinema} readOnly/> <br/><br/>
                 <label for="qty">NUMBER OF TICKETS</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="qty" value="3 pieces" readOnly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="qty" value={`${bookingDetails.seats.length} pieces`} readOnly/> <br/><br/>
                 <label for="total">TOTAL PAYMENT</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6] text-[#1D4ED8] font-bold' type="text" name="total" value="$30.00" readOnly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6] text-[#1D4ED8] font-bold' type="text" name="total" value={`$${bookingDetails.seats.length * 10}`} readOnly/> <br/><br/>
             </form>
         </div>
         <div>

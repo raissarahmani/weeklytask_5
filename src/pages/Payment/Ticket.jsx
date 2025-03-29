@@ -30,15 +30,15 @@ function Ticket() {
                 </div>
                 <div>
                     <div className='font-normal text-xs text-[#AAAAAA]'>Count</div>
-                    <div className='font-normal text-sm text-[#14142B] mt-[1vh] mb-[2vh]'>3pcs</div>
+                    <div className='font-normal text-sm text-[#14142B] mt-[1vh] mb-[2vh]'>{`${bookingDetails.seats.length} pcs`}</div>
                 </div>
                 <div>
                     <div className='font-normal text-xs text-[#AAAAAA]'>Seats</div>
-                    <div className='font-normal text-sm text-[#14142B] mt-[1vh] mb-[2vh]'>C4, C5, C6</div>
+                    <div className='font-normal text-sm text-[#14142B] mt-[1vh] mb-[2vh]'>{bookingDetails.seats.join(", ")}</div>
                 </div>
                 <div className='col-span-2 flex flex-row justify-around items-center border border-solid border-[#DEDEDE] rounded-sm m-[0]'>
                     <div className='font-normal text-xs text-[#AAAAAA]'>Total</div>
-                    <div className='font-normal text-sm text-[#14142B] mt-[1vh] mb-[2vh]'>$30.00</div>
+                    <div className='font-normal text-sm text-[#14142B] mt-[1vh] mb-[2vh]'>{`$ ${bookingDetails.seats.length * 10}`}</div>
                 </div>
             </div>
         </div>
