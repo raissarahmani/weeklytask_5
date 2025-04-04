@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router'
 import { useDispatch, useSelector } from 'react-redux'
 import { logout } from '../redux/slices/authSlice'
+import { resetData } from '../redux/slices/bookingSlice'
 
 import Pp from '../assets/pp.png'
 import Menu from '../assets/menu.png'
@@ -13,6 +14,7 @@ const user = useSelector((state) => state.auth.user)
 
 const handleLogout = () => {
     dispatch(logout())
+    dispatch(resetData())
 }
 
 function showMenu() {
@@ -31,9 +33,12 @@ function showMenu() {
         </nav>
         <div className='hidden md:block w-1/4'>
             {user ? ( 
-            <div className='flex flex-row justify-between'>
-                <div className='rounded-full'><Link to='/profile-page'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></Link></div>
-                <button onClick={handleLogout} className='header-button mx-[0.5vw] bg-[red] text-[#fff] border-[red]'><Link to='/auth'>Sign Out</Link></button>
+            <div onClick={showMenu} className='relative left-3/4'>
+                <div className='rounded-full'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></div>
+                <div className={`${IsMenuVisible ? "visible" : "invisible"} absolute top-[7vh] right-3/4 shadow-lg bg-[#fff] py-[2vh] px-[1vw] rounded-lg w-[15vw]`}>
+                    <p className='hover:bg-[#1D4ED8] hover:text-[#fff] hover:rounded-md px-[1vw] py-[1vh]'><Link to='/profile-page'>Profile</Link></p>
+                    <p className='hover:bg-[red] hover:text-[#fff] hover:rounded-md px-[1vw] py-[1vh]'><button onClick={handleLogout}><Link to='/auth'>Sign Out</Link></button></p>
+                </div>
             </div>) : 
             <div className='flex flex-row justify-evenly'>
                 <button className='header-button bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
@@ -50,7 +55,7 @@ function showMenu() {
                     {user ? (
                         <>
                             <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/profile-page'>Profile</Link></p>
-                            <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/auth'>Sign Out</Link></p>
+                            <p onClick={handleLogout} className='hover:bg-[red] hover:text-[#fff] my-[1vh]'><Link to='/auth'>Sign Out</Link></p>
                         </> ) : <>
                             <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/auth'>Sign In</Link></p>
                             <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/auth/register'>Sign Up</Link></p>

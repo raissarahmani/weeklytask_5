@@ -1,5 +1,8 @@
 import { useState } from 'react'
 import { Link } from 'react-router'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../redux/slices/authSlice'
+import { resetData } from '../redux/slices/bookingSlice'
 
 import Dropdown from '../assets/dropdown.png'
 import Search from '../assets/Search.png'
@@ -8,6 +11,14 @@ import Menu from '../assets/menu.png'
 
 function HeaderProfile() {
     const [IsMenuVisible, setIsMenuVisible] = useState(false)
+    const dispatch = useDispatch()
+
+    const user = useSelector((state) => state.auth.user)
+    
+    const handleLogout = () => {
+        dispatch(logout())
+        dispatch(resetData())
+    }
 
     function showMenu() {
         setIsMenuVisible((prev) => !prev)
@@ -23,13 +34,19 @@ function HeaderProfile() {
             <p className='hover:text-[#1D4ED8]'><Link to='now-playing'>Movie</Link></p>
             <p className='hover:text-[#1D4ED8]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
         </nav>
-        <div className='hidden md:flex flex-row justify-right items-center w-1/4'>
-            <div>Location</div>
-            <div className='flex flex-row justify-between items-center mx-[1vw]'>
-                <img className='object-contain w-[2vw] h-[3vh]' src={Dropdown} alt=""/>
-                <img className='object-contain w-[2vw] h-[3vh]' src={Search} alt=""/>
-            </div>
-            <div className='rounded-full'><Link to='/profile-page'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></Link></div>
+        <div className='hidden md:block w-1/4'>
+            {user ? ( 
+            <div onClick={showMenu} className='relative left-3/4'>
+                <div className='rounded-full'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></div>
+                <div className={`${IsMenuVisible ? "visible" : "invisible"} absolute top-[7vh] right-3/4 shadow-lg bg-[#fff] py-[2vh] px-[1vw] rounded-lg w-[15vw]`}>
+                    <p className='hover:bg-[#1D4ED8] hover:text-[#fff] hover:rounded-md px-[1vw] py-[1vh]'><Link to='/profile-page'>Profile</Link></p>
+                    <p className='hover:bg-[red] hover:text-[#fff] hover:rounded-md px-[1vw] py-[1vh]'><button onClick={handleLogout}><Link to='/auth'>Sign Out</Link></button></p>
+                </div>
+            </div>) : 
+            <div className='flex flex-row justify-evenly'>
+                <button className='header-button bg-[#fff] text-[#1D4ED8]'><Link to='/auth'>Sign In</Link></button>
+                <button className='header-button bg-[#1D4ED8] text-[#fff]'><Link to='/auth/register'>Sign Up</Link></button>
+            </div>}
         </div>
         <div onClick={showMenu} className='md:hidden relative cursor-pointer'>
             <img src={Menu} alt="Menu" />
@@ -39,6 +56,7 @@ function HeaderProfile() {
                     <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='now-playing'>Movie</Link></p>
                     <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/now-playing/detail'>Buy Ticket</Link></p>
                     <p className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/profile-page'>Profile</Link></p>
+                    <p onClick={handleLogout} className='hover:bg-[#1D4ED8] hover:text-[#fff] my-[1vh]'><Link to='/auth'>Sign Out</Link></p>
                 </nav>
             </div>
         </div>
