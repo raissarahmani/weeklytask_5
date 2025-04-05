@@ -17,8 +17,8 @@ const [emailIsVisible, setEmailIsVisible] = useState(false)
 const [passIsVisible, setPassIsVisible] = useState(false)
 const [showPass, setShowPass] = useState(false)
 
-const user = useSelector((state) => state.auth.user)
-const authError = useSelector((state) => state.auth.error)
+const user = useSelector((state) => state.user.user)
+const authError = useSelector((state) => state.user.error)
 const navigate = useNavigate()
 const dispatch = useDispatch()
 
