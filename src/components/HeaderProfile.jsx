@@ -4,8 +4,6 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../redux/slices/authSlice'
 import { resetData } from '../redux/slices/bookingSlice'
 
-import Dropdown from '../assets/dropdown.png'
-import Search from '../assets/Search.png'
 import Pp from '../assets/pp.png'
 import Menu from '../assets/menu.png'
 
@@ -13,7 +11,7 @@ function HeaderProfile() {
     const [IsMenuVisible, setIsMenuVisible] = useState(false)
     const dispatch = useDispatch()
 
-    const user = useSelector((state) => state.auth.user)
+    const user = useSelector((state) => state.user.user)
     
     const handleLogout = () => {
         dispatch(logout())
