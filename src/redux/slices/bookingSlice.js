@@ -6,7 +6,7 @@ const initialState = {
     genres: [],
     date: "",
     time: "",
-    city: "",
+    location: "",
     cinema: "",
     seats: [],
     total: 0,
@@ -19,26 +19,27 @@ const bookingSlice = createSlice({
         storeMovieDetails: (state, action) => {
             const {poster, title, genres} = action.payload
 
-            state.moviePoster = poster
-            state.movieTitle = title
-            state.movieGenres = genres
+            state.poster = poster
+            state.title = title
+            state.genres = genres
         },
         storeBookDetails: (state, action) => {
-            const {date, time, city, cinema} = action.payload
+            const {date, time, location, cinema} = action.payload
 
-            state.bookDate = date
-            state.bookTime = time
-            state.bookCity = city
-            state.bookCinema = cinema
+            state.date = date
+            state.time = time
+            state.location = location
+            state.cinema = cinema
         },
         storeSeatsDetails: (state, action) => {
             const {seats, total} = action.payload
 
-            state.seatsSeat = seats
-            state.seatsTotal = total
-        }
+            state.seats = seats
+            state.total = total
+        },
+        resetData: () => initialState
     }
 })
 
-export const {movieDetails, bookDetails, seatsDetails} = bookingSlice.actions
+export const {storeMovieDetails, storeBookDetails, storeSeatsDetails, resetData} = bookingSlice.actions
 export default bookingSlice.reducer
