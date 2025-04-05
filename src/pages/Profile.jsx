@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import useLocalStorage from '../hook/useLocalStorage'
 
 import Show from '../assets/eye.svg'
+import check from '../assets/check.svg'
 
 function Profile() {
     const [formProfile, setFormProfile] = useLocalStorage("userProfile", {
@@ -13,15 +14,15 @@ function Profile() {
         confirmpass: "",
     })
     const [error, setError] = useState({})
-    const [isFormValid, setIsFormValid] = useState(false)
     const [isClicked, setIsClicked] = useState(false)
     const [showPass, setShowPass] = useState(false)
+    const [isModalOpen, setIsModalOpen] = useState(false)
 
     const formHandler = (e) => {
         setFormProfile({...formProfile,[e.target.name] : e.target.value})
     }
 
-    useEffect(() => {
+    const validateForm = () => {
         let newError = {}
         if(!formProfile.firstname) newError.firstname = "Data should be filled"
         if(!formProfile.lastname) newError.lastname = "Data should be filled"
@@ -54,16 +55,23 @@ function Profile() {
 
         if(formProfile.confirmpass !== formProfile.pass) newError.confirmpass = "Password did not match"
 
-        setError(newError)
-        setIsFormValid(Object.keys(newError).length === 0)
+        return newError
+    }
+
+    useEffect(() => {
+        const validateDetails = validateForm()
+        setError(validateDetails)
     }, [formProfile])
 
     const buttonClicked = (e) => {
         e.preventDefault()
         setIsClicked(true)
+        const validateDetails = validateForm(formProfile)
+        setError(validateDetails)
 
-        if (isFormValid) {
+        if (Object.keys(validateDetails).length === 0) {
             localStorage.setItem("userProfile", JSON.stringify(formProfile))
+            setIsModalOpen(true)
         }
     }
 
@@ -123,6 +131,17 @@ function Profile() {
           </form>
       </section>
       <button onClick={buttonClicked} className='custom-button bg-[#1D4ED8] rounded-xl my-[7vh] md:mt-[7vh] py-[2vh] w-full md:w-1/2 text-[#fff]'>Update changes</button>
+      {isModalOpen && (
+        <div className='fixed inset-0 bg-[#00000099] flex justify-center items-center z-3'>
+            <section className='bg-[#fff] rounded-md absolute top-1/2 left-1/2 py-[5vh] px-[10vw] md:px-[3vw] transform -translate-x-1/2 -translate-y-1/2 z-4'>
+                <p className='text-center font-bold text-2xl'>Profile Updated</p>
+                <div className="flex items-center justify-center my-[3vh]">
+                <img src={check} alt="" className="w-1/2 h-1/2"/>
+                </div>
+                <button onClick={() => setIsModalOpen(false)} className='custom-button text-[#1D4ED8] bg-[#fff] w-full py-[2vh] font-semibold text-sm'>OK</button>
+            </section>
+        </div>
+        )}
     </div>
   ) 
 } 

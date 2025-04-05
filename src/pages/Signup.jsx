@@ -7,6 +7,7 @@ import Or from './Auth/Or'
 import Socmed from './Auth/Socmed'
 
 import Show from '../assets/eye.svg'
+import check from '../assets/check.svg'
 
 function Signup() {
   const [email, setEmail] = useState("")
@@ -19,6 +20,7 @@ function Signup() {
   const [isChecked, setIsChecked] = useState(false)
   const [checkboxMsg, setCheckboxMsg] = useState("Required")
   const [checkedIsVisible, setCheckedIsVisible] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
   const dispatch = useDispatch()
   
@@ -71,8 +73,7 @@ function Signup() {
     }
   
     dispatch(register({email, pass}))
-    alert("Register success. Please sign in")
-    navigate("/auth")
+    setIsModalOpen(true)
   }
 
   const showPassword = () => {
@@ -102,6 +103,17 @@ function Signup() {
       </div>
       <Or />
       <Socmed />
+      {isModalOpen && (
+        <div className='fixed inset-0 bg-[#00000099] flex justify-center items-center z-3'>
+            <section className='bg-[#fff] rounded-md absolute top-1/2 left-1/2 py-[5vh] px-[10vw] md:px-[3vw] transform -translate-x-1/2 -translate-y-1/2 z-4'>
+                <p className='text-center font-bold text-2xl'>Register Success</p>
+                <div className="flex items-center justify-center my-[3vh]">
+                <img src={check} alt="" className="w-1/2 h-1/2"/>
+                </div>
+                <button onClick={() => navigate("/auth")} className='custom-button text-[#1D4ED8] bg-[#fff] w-full py-[2vh] font-semibold text-sm'>Login</button>
+            </section>
+        </div>
+        )}
     </div>
   )
 }

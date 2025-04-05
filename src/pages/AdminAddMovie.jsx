@@ -52,7 +52,6 @@ const [addMovie, setAddMovie] = useLocalStorage("newMovie", {
         setError(validateDetails)
 
         if (Object.keys(validateDetails).length === 0) {
-            console.log("Form is valid ✅")
             localStorage.setItem("newMovie", JSON.stringify(addMovie))
             setIsModalOpen(true)
         }
