@@ -12,6 +12,8 @@ function Seats() {
         total: 0,
     })
 
+    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const moviePoster = useSelector((state) => state.book?.poster)
     const movieTitle = useSelector((state) => state.book?.title)
     const movieGenres = useSelector((state) => state.book?.genres)
@@ -48,6 +50,10 @@ function Seats() {
 
     const changeMovie = () => {
         navigate("/now-playing")
+    }
+
+    const buttonClicked = () => {
+        setIsModalOpen(true)
     }
 
     const nextPage = () => {
@@ -164,7 +170,7 @@ function Seats() {
                             </div>
                         </div>
                     </div>
-                    <button className='md:hidden custom-button bg-[#1D4ED8] text-sm text-[#fff] text-center py-[1vh] mt-[5vh] w-full'>Submit</button>
+                    <button onClick={buttonClicked} disabled={seatData.seats.length === 0} className='md:hidden custom-button bg-[#1D4ED8] text-sm text-[#fff] text-center py-[1vh] mt-[5vh] w-full'>Submit</button>
                 </div>
             </div>
         </section>
@@ -213,6 +219,53 @@ function Seats() {
               <button onClick={nextPage} disabled={seatData.seats.length === 0} className='custom-button my-[6vh] mx-[2vw] py-[2vh] w-4/5 text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
           </section>
       </div>
+      {isModalOpen && (
+        <div className='absolute inset-0 bg-[#00000099] flex justify-center items-center z-3'>
+            <section className='bg-[#fff] rounded-md absolute top-1/2 left-1/2 py-[5vh] px-[5vw] md:px-[3vw] transform -translate-x-1/2 -translate-y-1/2 z-4'>
+                <div className='py-[5vh] px-[5vw]'>
+                    <img src={`/${bookCinema || "logo"}.svg`} alt={bookCinema || "Cinema"} />
+                </div>
+                <div className='py-[2vh] px-[2vw]'>
+                    <div className='flex flex-row justify-between mb-[3vh]'>
+                        <div className='text-xs text-[#6B6B6B]'>Movie selected</div>
+                        <div className='font-semibold text-xs text-right text-[#14142B]'>{movieTitle || ""}</div>
+                    </div>
+                    <div className='flex flex-row justify-between mb-[3vh]'>
+                    <div className='text-xs text-[#6B6B6B]'>
+                        {bookDate
+                            ? new Date(bookDate).toLocaleDateString("en-US", {
+                                weekday: "long",
+                                day: "numeric",
+                                month: "long",
+                                year: "numeric",
+                            })
+                            : "No date selected"}
+                    </div>
+                        <div className='font-semibold text-xs text-center text-[#14142B]'>{bookTime || ""}</div>
+                    </div>
+                    <div className='flex flex-row justify-between mb-[3vh]'>
+                        <div className='text-xs text-[#6B6B6B]'>One ticket price</div>
+                        <div className='font-semibold text-xs text-center text-[#14142B]'>$10</div>
+                    </div>
+                    <div className='flex flex-row justify-between mb-[3vh]'>
+                        <div className='text-xs text-[#6B6B6B]'>Seat choosed</div>
+                        <div className='font-semibold text-xs text-right text-[#14142B]'>{[...(seats || [])]
+                        .sort((left,right) => {
+                          const [rowLeft, colLeft] = [left[0], parseInt(left.slice((1),10))]
+                          const [rowRight, colRight] = [right[0], parseInt(right.slice((1), 10))]
+                          return rowLeft > rowRight ? 1 : (rowLeft < rowRight ? -1 : (colLeft > colRight ? 1 : (colLeft < colRight ? -1 : 0)))
+                        })
+                        .join(", ") || "No seat selected"}</div>
+                    </div>
+                </div>
+                <div className='flex flex-row justify-between items-center py-[2vh] px-[2vw] border-t border-solid border-[#E6E6E6]'>
+                    <div>Total Payment</div>
+                    <div className='font-semibold text-[#1D4ED8] text-right'>${total}</div>
+                </div>
+                <button onClick={nextPage} disabled={seatData.seats.length === 0} className='custom-button my-[6vh] mx-[2vw] py-[2vh] w-9/10 text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
+            </section>
+        </div>
+    )}
     </>
   )
 }
