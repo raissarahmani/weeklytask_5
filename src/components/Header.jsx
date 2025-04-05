@@ -10,7 +10,7 @@ import Menu from '../assets/menu.png'
 function Header() {
 const [IsMenuVisible, setIsMenuVisible] = useState(false)
 const dispatch = useDispatch()
-const user = useSelector((state) => state.auth.user)
+const user = useSelector((state) => state.user.user)
 
 const handleLogout = () => {
     dispatch(logout())
@@ -37,7 +37,7 @@ function showMenu() {
                 <div className='rounded-full'><img className='object-cover h-[7vh] w-[7vh] rounded-full' src={Pp} alt="Profile"/></div>
                 <div className={`${IsMenuVisible ? "visible" : "invisible"} absolute top-[7vh] right-3/4 shadow-lg bg-[#fff] py-[2vh] px-[1vw] rounded-lg w-[15vw]`}>
                     <p className='hover:bg-[#1D4ED8] hover:text-[#fff] hover:rounded-md px-[1vw] py-[1vh]'><Link to='/profile-page'>Profile</Link></p>
-                    <p className='hover:bg-[red] hover:text-[#fff] hover:rounded-md px-[1vw] py-[1vh]'><button onClick={handleLogout}><Link to='/auth'>Sign Out</Link></button></p>
+                    <p className='hover:bg-[red] hover:text-[#fff] hover:rounded-md px-[1vw] py-[1vh]'><Link to='/auth' onClick={handleLogout}>Sign Out</Link></p>
                 </div>
             </div>) : 
             <div className='flex flex-row justify-evenly'>
