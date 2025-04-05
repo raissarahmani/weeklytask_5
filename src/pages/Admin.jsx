@@ -20,7 +20,6 @@ function Admin() {
                             <option className='text-[#4E4B68]' value="John Wick 3">John Wick 3</option>
                             <option className='text-[#4E4B68]' value="Roblox">Roblox</option>
                         </select>
-                        <p className='validation-msg'>Choose movie</p>
                     </div>
                     <div className='w-1/3'>
                         <label for="periode"></label>
@@ -30,7 +29,6 @@ function Admin() {
                             <option className='text-[#4E4B68]' value="weekly">Weekly</option>
                             <option className='text-[#4E4B68]' value="monthly">Monthly</option>
                         </select>
-                        <p className='validation-msg'>Choose periode</p>
                     </div>
                     <div className='w-1/3'>
                         <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal py-[1.5vh] px-[1vw] w-full' type="submit">Filter</button>
@@ -94,7 +92,6 @@ function Admin() {
                             <option className='text-[#4E4B68]' value="Comedy">Comedy</option>
                             <option className='text-[#4E4B68]' value="Sci-fi">Sci-Fi</option>
                         </select>
-                        <p className='validation-msg'>Choose category</p>
                     </div>
                     <div className='w-1/3'>
                         <label for="location"></label>
@@ -112,7 +109,6 @@ function Admin() {
                             <option className='text-[#4E4B68]' value="Makassar">Makassar</option>
                             <option className='text-[#4E4B68]' value="Denpasar">Denpasar</option>
                         </select>
-                        <p className='validation-msg'>Choose location</p>
                     </div>
                     <div className='w-1/3'>
                         <button className='custom-button bg-[#1D4ED8] text-[#fff] font-normal py-[1.5vh] px-[1vw] w-full' type="button">Filter</button>
