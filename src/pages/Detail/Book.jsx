@@ -1,13 +1,14 @@
 import { useNavigate } from 'react-router'
 import { useState, useEffect } from 'react'
-import useLocalStorage from '../../hook/useLocalStorage'
+import { useDispatch } from 'react-redux'
+import { storeBookDetails } from '../../redux/slices/bookingSlice'
 
 import Calendar from '../../assets/calendar.png'
 import Clock from '../../assets/time.png'
 import Location from '../../assets/location.png'
 
 function Book() {
-    const [formData, setFormData] = useLocalStorage("bookingDetails", {
+    const [formData, setFormData] = useState({
         date: "",
         time: "",
         location: "",
@@ -17,6 +18,7 @@ function Book() {
     const [isFormValid, setIsFormValid] = useState(false)
     const [isSubmitted, setIsSubmitted] = useState(false)
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const formHandler = (e) => {
         setFormData({...formData,[e.target.name] : e.target.value})
@@ -38,7 +40,7 @@ function Book() {
         setIsSubmitted(true)
 
         if (isFormValid) {
-            localStorage.setItem("bookingDetails", JSON.stringify(formData))
+            dispatch(storeBookDetails(formData))
             navigate("/now-playing/order")
         }
     }

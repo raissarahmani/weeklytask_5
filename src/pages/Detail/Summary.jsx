@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router'
+import { useDispatch } from 'react-redux'
 import {getDetail, getCredits} from '../../api/movieList'
-import useLocalStorage from '../../hook/useLocalStorage'
+import {storeMovieDetails} from '../../redux/slices/bookingSlice'
 
 function Summary() {
     const {id} = useParams()
     const [movie, setMovie] = useState(null)
     const [credits, setCredits] = useState(null)
-    const [movieDetails, setMovieDetails] = useLocalStorage("movieDetails", {
+    const dispatch = useDispatch()
+    const [movieDetails, setMovieDetails] = useState({
       poster: "",
       title: "",
       genres: "",
@@ -24,11 +26,14 @@ function Summary() {
             if (!creditsData) throw new Error ("Data is missing")
             setCredits(creditsData);
 
-            setMovieDetails({
+            const fetchedMovie = {
               poster: `https://image.tmdb.org/t/p/w500${movieData.poster_path}`,
               title: movieData.title,
               genres: movieData.genres.map(el => el.name).join(", ")
-            })
+            }
+
+            setMovieDetails(fetchedMovie)
+            dispatch(storeMovieDetails(fetchedMovie))
           }
           catch (error) {
             console.error(error.message)
@@ -36,7 +41,7 @@ function Summary() {
         }
 
         fetchData();
-      }, [id, setMovieDetails]);
+      }, [id, dispatch]);
     
       if (!movie || !credits) return <p>Loading...</p>
 
