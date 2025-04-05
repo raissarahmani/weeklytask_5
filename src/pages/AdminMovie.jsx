@@ -1,14 +1,30 @@
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Calendar from "../assets/calendar.png"
 import Show from "../assets/eye2.png"
 import Edit from "../assets/edit.png"
-import Delete from "../assets/Delete.png" 
+import Delete from "../assets/Delete.png"
 
 function AdminMovie() {
+    const [isModalOpen, setIsModalOpen] = useState(false)
     const navigate = useNavigate()
+    
+    const confirmDelete = () => {
+        setIsModalOpen(true)
+    }
+
+    const deleteMovie = () => {
+        localStorage.removeItem("movie")
+    }
+
+    const cancelDelete = () => {
+        setIsModalOpen(false)
+    }
+
     const nextPage = () => {
         navigate("/admin/add-movie")
     }
+
   return (
     <section className='bg-[#fff] rounded-3xl py-[7vh] px-[5vw]'>
         <div className='flex flex-row justify-between'>
@@ -43,7 +59,7 @@ function AdminMovie() {
                     <td className='flex flex-row gap-1 justify-center items-center text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[100px]'>
                         <img className='bg-[#1D4ED8] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Show} alt="Preview"/>
                         <img className='bg-[#5D5FEF] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Edit} alt="Edit"/>
-                        <img className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
+                        <img onClick={confirmDelete} className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
                     </td>
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
@@ -56,7 +72,7 @@ function AdminMovie() {
                     <td className='flex flex-row gap-1 justify-center items-center text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[100px]'>
                         <img className='bg-[#1D4ED8] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Show} alt="Preview"/>
                         <img className='bg-[#5D5FEF] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Edit} alt="Edit"/>
-                        <img className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
+                        <img onClick={confirmDelete} className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
                     </td>
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
@@ -69,7 +85,7 @@ function AdminMovie() {
                     <td className='flex flex-row gap-1 justify-center items-center text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[100px]'>
                         <img className='bg-[#1D4ED8] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Show} alt="Preview"/>
                         <img className='bg-[#5D5FEF] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Edit} alt="Edit"/>
-                        <img className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
+                        <img onClick={confirmDelete} className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
                     </td>
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
@@ -82,7 +98,7 @@ function AdminMovie() {
                     <td className='flex flex-row gap-1 justify-center items-center text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[100px]'>
                         <img className='bg-[#1D4ED8] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Show} alt="Preview"/>
                         <img className='bg-[#5D5FEF] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Edit} alt="Edit"/>
-                        <img className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
+                        <img onClick={confirmDelete} className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
                     </td>
                 </tr>
                 <tr className='border-b border-[#E6EAF0] text-center'>
@@ -95,7 +111,7 @@ function AdminMovie() {
                     <td className='flex flex-row gap-1 justify-center items-center text-[#1F4173] text-xs font-semibold py-[2vh] min-w-[100px]'>
                         <img className='bg-[#1D4ED8] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Show} alt="Preview"/>
                         <img className='bg-[#5D5FEF] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Edit} alt="Edit"/>
-                        <img className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
+                        <img onClick={confirmDelete} className='bg-[#E82C2C] rounded-md object-contain w-[5vh] h-[5vh] p-[1vh] cursor-pointer' src={Delete} alt="Delete"/>
                     </td>
                 </tr>
             </table>
@@ -106,6 +122,17 @@ function AdminMovie() {
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>3</div>
             <div className='pages hover:bg-[#1D4ED8] hover:text-[#fff]'>4</div>
         </div>
+        {isModalOpen && (
+            <div className='fixed inset-0 bg-[#00000099] flex justify-center items-center z-3'>
+                <section className='bg-[#fff] rounded-md absolute top-1/2 left-1/2 py-[5vh] px-[10vw] md:px-[3vw] transform -translate-x-1/2 -translate-y-1/2 z-4'>
+                    <p className='text-center font-bold text-2xl'>Movie deleted cannot be added again.<br/> Are you sure about this change?</p>
+                    <div className="flex flex-row items-center justify-center my-[3vh] gap-3">
+                        <button onClick={deleteMovie} className='custom-button text-[#1D4ED8] hover:text-[#fff] hover:bg-[red] hover:border-[red] w-full py-[2vh] font-semibold text-sm'>Yes</button>
+                        <button onClick={cancelDelete} className='custom-button hover:bg-[#1D4ED8] text-[#1D4ED8] hover:text-[#fff] w-full py-[2vh] font-semibold text-sm'>No</button>
+                    </div>
+                </section>
+            </div>
+            )}
     </section>
   )
 }
