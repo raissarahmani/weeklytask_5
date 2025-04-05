@@ -1,29 +1,46 @@
 import { useNavigate } from 'react-router'
-import useLocalStorage from '../../hook/useLocalStorage'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { storeSeatsDetails } from '../../redux/slices/bookingSlice'
 
 import Down from '../../assets/Arrow-black.png'
 import Right from '../../assets/right-black.png'
 
 function Seats() {
-    const [formData, setFormData] = useLocalStorage("bookingDetails", {
-        date: "",
-        time: "",
-        location: "",
-        cinema: "",
+    const [seatData, setSeatData] = useState({
         seats: [],
-    })    
-    const [movieDetails] = useLocalStorage("movieDetails", {})
-    const [bookingDetails] = useLocalStorage("bookingDetails", {})
+        total: 0,
+    })
+
+    const moviePoster = useSelector((state) => state.book?.poster)
+    const movieTitle = useSelector((state) => state.book?.title)
+    const movieGenres = useSelector((state) => state.book?.genres)
+    const bookDate = useSelector((state) => state.book?.date)
+    const bookTime = useSelector((state) => state.book?.time)
+    const bookCinema = useSelector((state) => state.book?.cinema)
+    const seats = useSelector((state) => state.book?.seats)
+    const total = useSelector((state) => state.book?.total)
+
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const seatHandler = (seatId) => {
-        setFormData((prevData) => ({
-            ...prevData,
-            seats: (prevData.seats || []).includes(seatId) 
+        setSeatData((prevData) => {
+            const checkSeats = (prevData.seats || []).includes(seatId) 
             ? (prevData.seats || []).filter((seat) => seat !== seatId)
-            : [...(prevData.seats || []), seatId],
-        }))
+            : [...(prevData.seats || []), seatId]
+
+            return {
+                ...prevData,
+                seats: [...checkSeats],
+                total: checkSeats.length * 10
+            }
+        })
     }
+    
+    useEffect(() => {
+        dispatch(storeSeatsDetails(seatData))
+    }, [seatData, dispatch])
 
     const rows = ["A", "B", "C", "D", "E", "F", "G"]
     const colsLeft = [1,2,3,4,5,6,7]
@@ -42,17 +59,17 @@ function Seats() {
         <section className='w-full md:w-3/4 rounded-md bg-[#fff] py-[5vh] px-[2vw]'>
             <div className='ticket'>
                 <div className='col-span-1 row-span-3 flex justify-center items-center h-full md:overflow-hidden md:pr-[2vw] pb-[2vh]'>
-                    <img className='object-cover object-top w-full h-full' src={movieDetails.poster || "/avenger.png"} alt={movieDetails.title || "Movie Poster"} />
+                    <img className='object-cover object-top w-full h-full' src={moviePoster || "/logo.png"} alt={movieTitle || "Movie Poster"} />
                 </div>
-                <p className='md:col-span-2 row-span-1 font-semibold text-2xl text-center md:text-left text-[#000]'>{movieDetails.title || ""}</p>
+                <p className='md:col-span-2 row-span-1 font-semibold text-2xl text-center md:text-left text-[#000]'>{movieTitle || ""}</p>
                 <div className='md:col-span-2 row-span-1 flex flex-row items-center justify-center md:justify-start'>
-                    {movieDetails.genres 
-                        ? movieDetails.genres.split(", ").map((genre, idx) => (
+                    {movieGenres 
+                        ? movieGenres.split(", ").map((genre, idx) => (
                             <div key={idx} className="movie-genre">{genre}</div>
                           ))
                         : <div className="text-gray-500">No Genre Available</div>}
                 </div>
-                <p className='col-span-1 row-span-1 my-[2vh] text-center md:text-left'>Regular - {bookingDetails.time || ""}</p>
+                <p className='col-span-1 row-span-1 my-[2vh] text-center md:text-left'>Regular - {bookTime || ""}</p>
                 <button onClick={changeMovie} className='custom-button col-span-1 row-span-1 py-[1vh] bg-[#1D4ED8] text-[#fff] text-sm font-normal'>Change</button>
             </div>
             <div>
@@ -66,11 +83,14 @@ function Seats() {
                             ))}
                         </div>
                         <div className='flex flex-row justify-between w-full md:w-2/3'>
-                            <div className={`grid grid-cols-${colsLeft.length} mt-[5vh] border-b border-[red] md:border-none`}>
+                            <div 
+                            className='grid mt-[5vh] border-b border-[red] md:border-none'
+                            style={{gridTemplateColumns: `repeat(${colsLeft.length}, 1fr)`}}
+                            >
                                 {rows.map((row) => (
                                     colsLeft.map((col) => {
                                         const seatId = `${row}${col}`;
-                                        const isSelected = (formData.seats || []).includes(seatId);
+                                        const isSelected = (seatData.seats || []).includes(seatId);
                                     
                                         return (
                                             <div 
@@ -86,11 +106,14 @@ function Seats() {
                                     <div key={col} className='hidden md:block seats bg-transparent text-center'>{col}</div>
                                 ))}
                             </div>
-                            <div className={`grid grid-cols-${colsRight.length} mt-[5vh] border-b border-[red] md:border-none`}>
+                            <div 
+                            className='grid mt-[5vh] border-b border-[red] md:border-none'
+                            style={{gridTemplateColumns: `repeat(${colsRight.length}, 1fr)`}}
+                            >
                                 {rows.map((row) => (
                                     colsRight.map((col) => {
                                         const seatId = `${row}${col}`;
-                                        const isSelected = (formData.seats || []).includes(seatId);
+                                        const isSelected = (seatData.seats || []).includes(seatId);
                                     
                                         return (
                                             <div 
@@ -148,17 +171,17 @@ function Seats() {
         <div className='hidden md:block w-1/4 pl-[2vw]'>
           <section className='rounded-md bg-[#fff]'>
               <div className='py-[5vh] px-[5vw]'>
-                  <img src={`/${bookingDetails.cinema || "logo"}.svg`} alt={bookingDetails.cinema || "Cinema"} />
+                  <img src={`/${bookCinema || "logo"}.svg`} alt={bookCinema || "Cinema"} />
               </div>
               <div className='py-[2vh] px-[2vw]'>
                   <div className='flex flex-row justify-between mb-[3vh]'>
                       <div className='text-xs text-[#6B6B6B]'>Movie selected</div>
-                      <div className='font-semibold text-xs text-right text-[#14142B]'>{movieDetails.title || ""}</div>
+                      <div className='font-semibold text-xs text-right text-[#14142B]'>{movieTitle || ""}</div>
                   </div>
                   <div className='flex flex-row justify-between mb-[3vh]'>
                   <div className='text-xs text-[#6B6B6B]'>
-                      {bookingDetails.date
-                          ? new Date(bookingDetails.date).toLocaleDateString("en-US", {
+                      {bookDate
+                          ? new Date(bookDate).toLocaleDateString("en-US", {
                               weekday: "long",
                               day: "numeric",
                               month: "long",
@@ -166,7 +189,7 @@ function Seats() {
                           })
                           : "No date selected"}
                   </div>
-                      <div className='font-semibold text-xs text-center text-[#14142B]'>{bookingDetails.time || ""}</div>
+                      <div className='font-semibold text-xs text-center text-[#14142B]'>{bookTime || ""}</div>
                   </div>
                   <div className='flex flex-row justify-between mb-[3vh]'>
                       <div className='text-xs text-[#6B6B6B]'>One ticket price</div>
@@ -174,7 +197,7 @@ function Seats() {
                   </div>
                   <div className='flex flex-row justify-between mb-[3vh]'>
                       <div className='text-xs text-[#6B6B6B]'>Seat choosed</div>
-                      <div className='font-semibold text-xs text-right text-[#14142B]'>{(bookingDetails.seats || [])
+                      <div className='font-semibold text-xs text-right text-[#14142B]'>{[...(seats || [])]
                       .sort((left,right) => {
                         const [rowLeft, colLeft] = [left[0], parseInt(left.slice((1),10))]
                         const [rowRight, colRight] = [right[0], parseInt(right.slice((1), 10))]
@@ -185,9 +208,9 @@ function Seats() {
               </div>
               <div className='flex flex-row justify-between items-center py-[2vh] px-[2vw] border-t border-solid border-[#E6E6E6]'>
                   <div>Total Payment</div>
-                  <div className='font-semibold text-[#1D4ED8] text-right'>${(bookingDetails.seats || []) ? (bookingDetails.seats || []).length * 10 : 0}</div>
+                  <div className='font-semibold text-[#1D4ED8] text-right'>${total}</div>
               </div>
-              <button onClick={nextPage} className='custom-button my-[6vh] mx-[2vw] py-[2vh] w-4/5 text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
+              <button onClick={nextPage} disabled={seatData.seats.length === 0} className='custom-button my-[6vh] mx-[2vw] py-[2vh] w-4/5 text-[#fff] text-sm bg-[#1D4ED8]'>Checkout now</button>
           </section>
       </div>
     </>

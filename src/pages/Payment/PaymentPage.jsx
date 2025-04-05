@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
-import useLocalStorage from '../../hook/useLocalStorage';
+import { useSelector } from 'react-redux';
+import useLocalStorage from '../../hook/useLocalStorage'
 
 import Googlepay from '../../assets/google-pay.png'
 import Visa from "../../assets/visa.png";
@@ -12,8 +13,12 @@ import Bri from '../../assets/bri.png'
 import Ovo from '../../assets/ovo.png'
 
 function PaymentPage() {
-    const [movieDetails] = useLocalStorage("movieDetails", {})
-    const [bookingDetails] = useLocalStorage("bookingDetails", {})
+    const movieTitle = useSelector((state) => state.book?.title)
+    const bookDate = useSelector((state) => state.book?.date)
+    const bookTime = useSelector((state) => state.book?.time)
+    const bookCinema = useSelector((state) => state.book?.cinema)
+    const seats = useSelector((state) => state.book?.seats)
+    const total = useSelector((state) => state.book?.total)
     
     const [formPayment, setFormPayment] = useLocalStorage("paymentDetails", {
         name: "",
@@ -72,15 +77,16 @@ function PaymentPage() {
             <p className='font-semibold text-xl md:text-2xl text-[#14142B]'>Payment Info</p>
             <form className='my-[5vh] text-sm text-[#8692A6]'>
                 <label for="date">DATE & TIME</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="date" value={`${bookingDetails.date ? new Date(bookingDetails.date).toLocaleDateString("en-US", {weekday: "long", day: "numeric", month: "long", year: "numeric",}) : "No date selected"} at ${bookingDetails.time }`} readOnly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="date" value={`${bookDate ? 
+                    new Date(bookDate).toLocaleDateString("en-US", {weekday: "long", day: "numeric", month: "long", year: "numeric",}) : "No date selected"} at ${bookTime }`} readOnly/> <br/><br/>
                 <label for="title">MOVIE TITLE</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="title" value={movieDetails.title} readOnly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="title" value={movieTitle} readOnly/> <br/><br/>
                 <label for="cinema">CINEMA NAME</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="cinema" value={bookingDetails.cinema} readOnly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="cinema" value={bookCinema} readOnly/> <br/><br/>
                 <label for="qty">NUMBER OF TICKETS</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="qty" value={`${bookingDetails.seats.length} pieces`} readOnly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6]' type="text" name="qty" value={`${seats.length} pieces`} readOnly/> <br/><br/>
                 <label for="total">TOTAL PAYMENT</label> <br/>
-                <input className='form-input pl-0 border-none border-[#E6E6E6] text-[#1D4ED8] font-bold' type="text" name="total" value={`$${bookingDetails.seats.length * 10}`} readOnly/> <br/><br/>
+                <input className='form-input pl-0 border-none border-[#E6E6E6] text-[#1D4ED8] font-bold' type="text" name="total" value={`$${total}`} readOnly/> <br/><br/>
             </form>
         </div>
         <div>
@@ -171,7 +177,7 @@ function PaymentPage() {
             </div>
             <div className='flex flex-col md:flex-row items-start md:items-center justify-between my-[7vh]'>
                 <p className='text-[#8692A6] text-sm'>Total Payment :</p>
-                <p className='font-bold text-lg text-[#1D4ED8] text-right'>$30</p>
+                <p className='font-bold text-lg text-[#1D4ED8] text-right'>{`$${total}`}</p>
             </div>
             <p className='text-sm md:text-basis text-[#A0A3BD]'>Pay this payment bill before it is due, <span className='text-[D00707]'>on June 23, 2023.</span> If the bill has not been paid by the specified time, it will be forfeited</p>
             <div className='flex flex-col items-center justify-between my-[7vh] gap-[1vh]'>
