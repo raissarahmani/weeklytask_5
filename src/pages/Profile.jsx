@@ -80,7 +80,7 @@ function Profile() {
       }
 
   return (
-    <div className='mx-[10vw] md:mx-0'>
+    <div className='hidden md:block mx-[10vw] md:mx-0'>
       <section className='bg-[#fff] rounded-b-none md:rounded-b-2xl rounded-2xl mt-[7vh] md:my-[7vh] py-[7vh] px-[5vw] md:px-[2vw]'>
           <p className='font-semibold border-b border-solid border-[#DEDEDE] pb-[3vh]'>Detail Information</p>
           <form className='grid grid-cols-1 md:grid-cols-2 grid-rows-4 md:grid-rows-2 my-[5vh] text-sm text-[#8692A6]'>

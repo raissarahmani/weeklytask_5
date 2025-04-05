@@ -8,7 +8,7 @@ function ProfilePage() {
   return (
     <div className='bg-[#aaa]'>
       <HeaderProfile />
-      <main className='flex flex-row bg-[#A0A3BD md:py-[10vh] md:px-[5vw]'>
+      <main className='md:flex flex-row bg-[#A0A3BD md:py-[10vh] md:px-[5vw]'>
         <Acc />
         <div className='w-full md:w-3/4 md:ml-[4vw]'>
             <Option />
