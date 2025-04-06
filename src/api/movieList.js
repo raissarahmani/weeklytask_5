@@ -1,5 +1,5 @@
-const API_KEY = "ae266d92588cded8ace6fb5f85c35955"
-const BASE_URL = 'https://api.themoviedb.org/3'
+const API_KEY = import.meta.env.VITE_API_KEY
+const BASE_URL = import.meta.env.VITE_BASE_URL
 
 export async function getGenre () {
     try {
